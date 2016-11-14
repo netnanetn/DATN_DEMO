@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompetitivenessIndexModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Attribute">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="FactorId" Type="Int32" Nullable="false" />
+    <Property Name="CriteriaId" Type="Int32" Nullable="false" />
+    <Property Name="AttributeId" Type="Int32" Nullable="false" />
+    <Property Name="AttributeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Score" Type="Double" />
+    <Property Name="Weight" Type="Double" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Criteria">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="FactorId" Type="Int32" Nullable="false" />
+    <Property Name="CriteriaId" Type="Int32" Nullable="false" />
+    <Property Name="CriteriaName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Score" Type="Double" />
+    <Property Name="Weight" Type="Double" />
+  </EntityType>
+  <EntityType Name="Factor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="FactorId" Type="Int32" Nullable="false" />
+    <Property Name="FactorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Score" Type="Double" />
+    <Property Name="Weight" Type="Double" />
+  </EntityType>
+  <EntityContainer Name="CompetitivenessIndexEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Attributes" EntityType="Self.Attribute" />
+    <EntitySet Name="Branchs" EntityType="Self.Branch" />
+    <EntitySet Name="Criterias" EntityType="Self.Criteria" />
+    <EntitySet Name="Factors" EntityType="Self.Factor" />
+  </EntityContainer>
+</Schema>

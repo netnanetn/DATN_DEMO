@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CompetitivenessIndexModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Attributes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="FactorId" Type="int" Nullable="false" />
+    <Property Name="CriteriaId" Type="int" Nullable="false" />
+    <Property Name="AttributeId" Type="int" Nullable="false" />
+    <Property Name="AttributeName" Type="nvarchar(max)" />
+    <Property Name="Score" Type="float" />
+    <Property Name="Weight" Type="float" />
+  </EntityType>
+  <EntityType Name="Branchs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="BranchName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Criterias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="FactorId" Type="int" Nullable="false" />
+    <Property Name="CriteriaId" Type="int" Nullable="false" />
+    <Property Name="CriteriaName" Type="nvarchar(max)" />
+    <Property Name="Score" Type="float" />
+    <Property Name="Weight" Type="float" />
+  </EntityType>
+  <EntityType Name="Factors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="FactorId" Type="int" Nullable="false" />
+    <Property Name="FactorName" Type="nvarchar(max)" />
+    <Property Name="Score" Type="float" />
+    <Property Name="Weight" Type="float" />
+  </EntityType>
+  <EntityContainer Name="CompetitivenessIndexModelStoreContainer">
+    <EntitySet Name="Attributes" EntityType="Self.Attributes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branchs" EntityType="Self.Branchs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Criterias" EntityType="Self.Criterias" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factors" EntityType="Self.Factors" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

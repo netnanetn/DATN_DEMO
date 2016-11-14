@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Competitiveness.Branch>
+
+@{
+    ViewBag.Title = "BuildingIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="page-heading page-heading-md" style="background-color:#337ab7">
+
+
+    <div class="container-fluid-md">
+        <div class="row">
+            <p class="">Lựa chọn ngành để xem chỉ số cạnh tranh</p>
+            <div class="col-md-12">
+                @* not me *@
+                <select name="sweets">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.BranchId">@item.BranchName</option>
+                    }
+                    <option>Tạo mới dữ liệu</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
+
+   <div id="table_factor"></div>
+   
+
+</div>
+<script>
+    $("select")
+      .change(function () {
+
+      
+
+
+          $("select option:selected").each(function () {
+             
+             
+             // var ids = $(this).val().toString();
+              var idss = ($(this).val()).toString;
+              $.ajax({
+                  url: '@Url.Action("PartialViewFactor", "Home", new {id = "1" })',
+                  type: "GET",
+                  success: function (response) {               
+                   $("#table_factor").html(response);
+                  },
+                  error: function () {
+                  alert("error occured");
+              }
+        
+          });
+
+
+          });
+          //
+      })
+      .change();
+</script>
