@@ -29,5 +29,9 @@ namespace Competitiveness.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Competitiveness.Branch> Branches { get; set; }
+
+        public System.Data.Entity.DbSet<Competitiveness.Factor> Factors { get; set; }
     }
 }

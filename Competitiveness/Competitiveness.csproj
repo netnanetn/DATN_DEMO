@@ -219,6 +219,7 @@
       <DependentUpon>Competitiveness.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Criteria.cs">
@@ -297,6 +298,7 @@
     <Content Include="Veneto\demo\images\avatars\7.jpg" />
     <Content Include="Veneto\demo\images\avatars\8.jpg" />
     <Content Include="Veneto\demo\images\avatars\9.jpg" />
+    <Content Include="Veneto\demo\images\logo2.png" />
     <Content Include="Veneto\demo\images\profile.jpg" />
     <Content Include="Veneto\demo\js\analytics-overview.js" />
     <Content Include="Veneto\demo\js\charts-flot.js" />
@@ -517,6 +519,11 @@
     <Content Include="Views\Home\BuildingIndex.cshtml" />
     <Content Include="Views\Home\PartialViewFactor.cshtml" />
     <Content Include="Views\Home\Chart.cshtml" />
+    <Content Include="Views\Branch\Index.cshtml" />
+    <Content Include="Views\Branch\Create.cshtml" />
+    <Content Include="Views\Branch\Edit.cshtml" />
+    <Content Include="Views\Branch\EditFactor.cshtml" />
+    <Content Include="Views\Branch\CreateFactor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

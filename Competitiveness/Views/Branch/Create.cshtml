@@ -1,0 +1,47 @@
+﻿@model Competitiveness.Branch
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid-md">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6">
+                <p>Thêm mới chuyên ngành để tạo dữ liệu mẫu</p>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Thêm mới chuyên ngành</h4>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputText1">Mã chuyên ngành</label>
+
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.BranchId, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="exampleInputPassword1">Tên chuyên ngành</label>
+                                <div class="controls">
+                                    @Html.EditorFor(model => model.BranchName, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" type="submit">Lưu</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div style="float:right">
+        @Html.ActionLink("Quay lại", "Index")
+    </div>
+</div>

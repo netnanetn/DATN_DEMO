@@ -1,0 +1,129 @@
+﻿@model Competitiveness.Models.AllModel
+@{
+    ViewBag.Title = "EditFactor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><b>Trọng số các yếu tố cạnh tranh</b></h4>
+        <p style="float:right">
+            @Html.ActionLink("Thêm tiêu chí đánh giá", "CreateCriteria")
+        </p>
+    </div>
+    <div class="panel-body">
+        <table id="table-basic" class="table table-striped dataTable" role="grid" aria-describedby="table-basic_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Yếu tố cạnh tranh</th>
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Tiêu chí cạnh tranh</th>
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Thuộc tính cạnh tranh</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 237px;">Điểm số</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 223px;">Trọng lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model.factor)
+            {
+                    <tr>
+                        <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                        <td class="hidden">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class="hidden">
+                            @Html.DisplayFor(modelItem => item.BranchId)
+                        </td>
+                        <td class="hidden">
+                            @Html.DisplayFor(modelItem => item.FactorId)
+                        </td>
+                        <td>
+                            @*@Html.DisplayFor(modelItem => item.FactorName)*@
+                            @Html.ActionLink(item.FactorName, "EditFactor", new { branchId = item.BranchId, factorId = item.FactorId })
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Score)
+                        </td>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+
+                    </tr>
+
+                    foreach (var citem in Model.criteria)
+                    {
+                        if (citem.FactorId == item.FactorId)
+                        {
+
+                            <tr>
+                                <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                                <td class="hidden">
+                                    @Html.DisplayFor(modelItem => citem.Id)
+                                </td>
+                                <td class="hidden">
+                                    @Html.DisplayFor(modelItem => citem.BranchId)
+                                </td>
+                                <td class="hidden">
+                                    @Html.DisplayFor(modelItem => citem.CriteriaId)
+                                </td>
+                                <td></td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => citem.CriteriaName)*@
+                                    @Html.ActionLink(citem.CriteriaName, "EditCriteria", new { branchId = citem.BranchId, factorId = citem.FactorId, criteriaId = citem.CriteriaId })
+                                </td>
+                                <td></td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => citem.Score)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => citem.Weight)
+                                </td>
+
+                            </tr>
+                            foreach (var aitem in Model.attribute)
+                            {
+                                if (aitem.CriteriaId == citem.CriteriaId)
+                                {
+
+                                    <tr>
+                                        <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                                        <td class="hidden">
+                                            @Html.DisplayFor(modelItem => aitem.Id)
+                                        </td>
+                                        <td class="hidden">
+                                            @Html.DisplayFor(modelItem => aitem.BranchId)
+                                        </td>
+                                        <td class="hidden">
+                                            @Html.DisplayFor(modelItem => aitem.AttributeId)
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>
+                                            @*@Html.DisplayFor(modelItem => aitem.AttributeName)*@
+                                            @Html.ActionLink(aitem.AttributeName, "EditAttribute", new { branchId = aitem.BranchId, factorId = aitem.FactorId, criteriaId = aitem.CriteriaId, attributeId = aitem.AttributeId })
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => aitem.Score)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => aitem.Weight)
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

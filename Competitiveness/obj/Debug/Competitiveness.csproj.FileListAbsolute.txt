@@ -79,3 +79,4 @@ D:\Trung\DATN\Competitiveness\Competitiveness\bin\Microsoft.Owin.Security.Twitte
 D:\Trung\DATN\Competitiveness\Competitiveness\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Trung\DATN\Competitiveness\Competitiveness\obj\Debug\Competitiveness.dll
 D:\Trung\DATN\Competitiveness\Competitiveness\obj\Debug\Competitiveness.pdb
+D:\Trung\DATN\Competitiveness\Competitiveness\obj\Debug\Competitiveness.csprojResolveAssemblyReference.cache

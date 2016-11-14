@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using Newtonsoft.Json;
 namespace Competitiveness.Models
 {
     public class BranchModel
@@ -23,7 +23,7 @@ namespace Competitiveness.Models
         public Nullable<double> Score { get; set; }
         public Nullable<double> Weight { get; set; }
     }
-    public  class CriteriaModel
+    public class CriteriaModel
     {
         public int Id { get; set; }
         public int BranchId { get; set; }
@@ -58,4 +58,23 @@ namespace Competitiveness.Models
             branch = new List<Branch>();
         }
     }
+
+    public class CompetitivenessJson{
+        [JsonProperty("axis")]
+        public string Axis { get; set; }
+        [JsonProperty("value")]
+        public Nullable<double> Value { get; set; }
+
+    }
+    public class CompetitivenessJsons
+    {
+        public List<CompetitivenessJson> ImportantWeight { get; set; }
+        public List<CompetitivenessJson> MeanWeight { get; set; }
+        public CompetitivenessJsons()
+        {
+            ImportantWeight = new List<CompetitivenessJson>();
+            MeanWeight = new List<CompetitivenessJson>();
+        }
+    }
+   
 }
