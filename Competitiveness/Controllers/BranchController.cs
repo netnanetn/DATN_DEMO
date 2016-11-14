@@ -55,16 +55,16 @@ namespace Competitiveness.Controllers
         }
 
         // GET: Branch/Edit/5
-        public ActionResult Edit(int id =1)
+        public ActionResult Edit(int branchId)
         {
 
             var model = new AllModel();
-            var branchId = (from branch in db.Branchs
-                            where branch.BranchId == id
-                            select branch.BranchId).FirstOrDefault();
-
+            var branchs = (from branch in db.Branchs
+                           where branch.BranchId == branchId
+                           select branch).FirstOrDefault();
+            model.branch.Add(branchs);
             var factors = from factor in db.Factors
-                          where factor.BranchId.Equals(id)
+                          where factor.BranchId.Equals(branchId)
                           select factor;
             foreach (var fa in factors)
             {
@@ -72,14 +72,14 @@ namespace Competitiveness.Controllers
             }
 
             var criterias = from criteria in db.Criterias
-                            where criteria.BranchId.Equals(id)
+                            where criteria.BranchId.Equals(branchId)
                             select criteria;
             foreach (var criteria in criterias)
             {
                 model.criteria.Add(criteria);
             }
             var attributes = from attribute in db.Attributes
-                             where attribute.BranchId.Equals(id)
+                             where attribute.BranchId.Equals(branchId)
                              select attribute;
             foreach (var attribute in attributes)
             {
@@ -138,8 +138,32 @@ namespace Competitiveness.Controllers
 
         public ActionResult CreateFactor(int branchId, int companyId = 0)
         {
-            
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult CreateFactor(int branchId, Factor factor)
+        {
+            try
+            {
+                var count = db.Factors.Max(x => x.Id) + 1;
+                var factorSave = new Factor
+                {
+                    BranchId = factor.BranchId,
+                    FactorId = count,
+                    FactorName = factor.FactorName,
+                    Score = factor.Score,
+                    Weight = factor.Weight
+                };
+                db.Factors.Add(factorSave);
+                db.SaveChanges();
+
+                return RedirectToAction("/Branch/Index");
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
         }
         // GET: Branch/Delete/5
         public ActionResult Delete(int id)

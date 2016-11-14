@@ -7,7 +7,7 @@
     <div class="panel-heading">
         <h4 class="panel-title"><b>Trọng số các yếu tố cạnh tranh</b></h4>
         <p style="float:right">
-            @Html.ActionLink("Tạo mới yếu tố", "CreateFactor", new { branchId = 1 })
+            @Html.ActionLink("Tạo mới yếu tố", "CreateFactor", new { branchId = Model.branch[0].BranchId })
         </p>
     </div>
     <div class="panel-body">

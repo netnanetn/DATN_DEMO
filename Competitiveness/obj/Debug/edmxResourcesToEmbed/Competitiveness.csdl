@@ -6,10 +6,10 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="BranchId" Type="Int32" Nullable="false" />
-    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="FactorId" Type="Int32" Nullable="false" />
     <Property Name="CriteriaId" Type="Int32" Nullable="false" />
-    <Property Name="AttributeId" Type="Int32" Nullable="false" />
+    <Property Name="AttributeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="AttributeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Score" Type="Double" />
     <Property Name="Weight" Type="Double" />
@@ -19,18 +19,18 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BranchId" Type="Int32" Nullable="false" />
+    <Property Name="BranchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Criteria">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="BranchId" Type="Int32" Nullable="false" />
-    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="FactorId" Type="Int32" Nullable="false" />
-    <Property Name="CriteriaId" Type="Int32" Nullable="false" />
+    <Property Name="CriteriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="CriteriaName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Score" Type="Double" />
     <Property Name="Weight" Type="Double" />
@@ -41,8 +41,8 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="BranchId" Type="Int32" Nullable="false" />
-    <Property Name="CompanyId" Type="Int32" Nullable="false" />
-    <Property Name="FactorId" Type="Int32" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="FactorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
     <Property Name="FactorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Score" Type="Double" />
     <Property Name="Weight" Type="Double" />

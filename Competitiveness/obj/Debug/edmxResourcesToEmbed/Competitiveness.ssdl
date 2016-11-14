@@ -4,12 +4,12 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="BranchId" Type="int" Nullable="false" />
-    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" StoreGeneratedPattern="None" Nullable="false" />
     <Property Name="FactorId" Type="int" Nullable="false" />
     <Property Name="CriteriaId" Type="int" Nullable="false" />
-    <Property Name="AttributeId" Type="int" Nullable="false" />
+    <Property Name="AttributeId" Type="int" Nullable="false" StoreGeneratedPattern="None" />
     <Property Name="AttributeName" Type="nvarchar(max)" />
     <Property Name="Score" Type="float" />
     <Property Name="Weight" Type="float" />
@@ -18,19 +18,19 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BranchId" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BranchId" Type="int" StoreGeneratedPattern="None" Nullable="false" />
     <Property Name="BranchName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Criterias">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="BranchId" Type="int" Nullable="false" />
-    <Property Name="CompanyId" Type="int" Nullable="false" />
+    <Property Name="CompanyId" Type="int" Nullable="false" StoreGeneratedPattern="None" />
     <Property Name="FactorId" Type="int" Nullable="false" />
-    <Property Name="CriteriaId" Type="int" Nullable="false" />
+    <Property Name="CriteriaId" Type="int" Nullable="false" StoreGeneratedPattern="None" />
     <Property Name="CriteriaName" Type="nvarchar(max)" />
     <Property Name="Score" Type="float" />
     <Property Name="Weight" Type="float" />
