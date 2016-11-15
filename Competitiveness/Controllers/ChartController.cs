@@ -1,5 +1,4 @@
 ﻿using Competitiveness.Models;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,92 +9,89 @@ using System.Web.Script.Serialization;
 
 namespace Competitiveness.Controllers
 {
-    public class HomeController : Controller
+    public class ChartController : Controller
     {
         CompetitivenessIndexEntities db = new CompetitivenessIndexEntities();
-
+        #region
+        // GET: Chart
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult BuildingIndex()
+
+        // GET: Chart/Details/5
+        public ActionResult Details(int id)
         {
-            var model = from branch in db.Branchs
-                        where 1 == 1
-                        select branch;
-            return View(model);
+            return View();
         }
-      
-        public ActionResult PartialViewFactor(int id=0)
+
+        // GET: Chart/Create
+        public ActionResult Create()
         {
-            var model = new AllModel();
-            var branchId = (from branch in db.Branchs
-                           where branch.BranchId == id
-                           select branch.BranchId).FirstOrDefault();
-
-            var factors = from factor in db.Factors
-                          where factor.BranchId.Equals(id)
-                          select factor;
-            foreach(var fa in factors)
-            {
-                model.factor.Add(fa);
-            }
-
-            var criterias = from criteria in db.Criterias
-                            where criteria.BranchId.Equals(id)
-                            select criteria;
-            foreach(var criteria in criterias)
-            {
-                model.criteria.Add(criteria);
-            }
-            var attributes = from attribute in db.Attributes
-                            where attribute.BranchId.Equals(id)
-                            select attribute;
-            foreach (var attribute in attributes)
-            {
-                model.attribute.Add(attribute);
-            }
-
-
-            return PartialView("PartialViewFactor",model);
+            return View();
         }
-        public ActionResult Chart(int id =1)
+
+        // POST: Chart/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
-           
-            var model = new AllModel();
-            var branchs = (from branch in db.Branchs
-                            where 1==1
-                            select branch);
-            foreach(var branch in branchs)
+            try
             {
-                model.branch.Add(branch);
-            }
+                // TODO: Add insert logic here
 
-            var factors = from factor in db.Factors
-                          where factor.BranchId.Equals(id)
-                          select factor;
-            foreach (var fa in factors)
-            {
-                model.factor.Add(fa);
+                return RedirectToAction("Index");
             }
-
-            var criterias = from criteria in db.Criterias
-                            where criteria.BranchId.Equals(id)
-                            select criteria;
-            foreach (var criteria in criterias)
+            catch
             {
-                model.criteria.Add(criteria);
+                return View();
             }
-            var attributes = from attribute in db.Attributes
-                             where attribute.BranchId.Equals(id)
-                             select attribute;
-            foreach (var attribute in attributes)
-            {
-                model.attribute.Add(attribute);
-            }
-
-            return View(model);
         }
+
+        // GET: Chart/Edit/5
+        public ActionResult Edit(int id)
+        {
+            return View();
+        }
+
+        // POST: Chart/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Chart/Delete/5
+        public ActionResult Delete(int id)
+        {
+            return View();
+        }
+
+        // POST: Chart/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+        #endregion
+
         [HttpGet]
         public string GetDataJson(int id)
         {
@@ -149,7 +145,6 @@ namespace Competitiveness.Controllers
                 MeanWeightFactor += (Double)fa.Score;
             }
             MeanWeightFactor = MeanWeightFactor / countFactor;
-            MeanWeightFactor = Math.Round(MeanWeightFactor, 4, MidpointRounding.AwayFromZero);
             foreach (var fa in factors)
             {
                 var JsonImportantWeight = new CompetitivenessJson
@@ -169,24 +164,10 @@ namespace Competitiveness.Controllers
             JToken tokenMeanWeight = jo["MeanWeight"];
             var ImportantWeightString = tokenImportantWeight.ToString();
             var MeanWeightString = tokenMeanWeight.ToString();
-            var result = ("[" + ImportantWeightString + "," + MeanWeightString + "]").Replace("\"Axis\"", "axis").Replace("\"Value\"", "value");
+            var result = ("[" + ImportantWeightString + "," + MeanWeightString + "]").Replace("Axis", "axis").Replace("Value", "value").Replace("\n","").Replace("\r","").Replace('\"','"');
             ChartModel modelChart = new ChartModel();
             modelChart.modelChart = result;
             return result;
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }

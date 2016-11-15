@@ -9,26 +9,46 @@
         .chart polygon {
             fill-opacity: 0 !important;
         }
+
         .chart svg:not(:root) {
-    overflow: visible;
-}
+            overflow: visible;
+        }
 </style>
+<div class="container-fluid-md">
+    <div class="row">
+        <p class="">Lựa chọn ngành để xem chỉ số cạnh tranh</p>
+        <div class="col-md-12">
+            @* not me *@
+            <select name="sweets">
+                @foreach (var item in Model.branch)
+                {
+                    <option value="@item.BranchId">@item.BranchName</option>
+                }
+                <option>Tạo mới dữ liệu</option>
+            </select>
+        </div>
+    </div>
+</div>
+<br />
+
 <div class="page-heading page-heading-md" style="background-color:rgba(68, 157, 68, 0.52)">
 
     <br />
     <div id="chart" class="chart"></div>
 </div>
 <script type="text/javascript">
-    $("select")
-  .change(function () {
+  
+    $("select").change(function () {
       $("select option:selected").each(function () {
           // var ids = $(this).val().toString();
           var idss = ($(this).val()).toString;
           $.ajax({
-              url: '@Url.Action("PartialViewFactor", "Home", new {id = "1" })',
+              url: '@Url.Action("GetDataJson", "Chart", new {id = 1 })',
               type: "GET",
+              dataType: 'text',
               success: function (response) {
-                  $("#table_factor").html(response);
+                  var d = JSON.parse(response);
+                   chart(d);
               },
               error: function () {
                   alert("error occured");
@@ -37,30 +57,90 @@
       });
       //
   })
-  .change();
-
-    
-    var d = [
-                 [
-                   { axis: "Management Competency", value: 0.8875 },
-                   { axis: "Organizing Competency", value: 0.7063 },
-                   { axis: "Teachnological Capability", value: 0.7875 },
-                   { axis: "Financial Competency", value: 0.8875 },
-                   { axis: "Market Share", value: 0.8938 },
-                   { axis: "Social Responsibility", value: 0.7063 },
-                   { axis: "Regional Competitiveness", value: 0.7375 }
-                 ], [
-                   { axis: "Management Competency", value: 0.8009 },
-                   { axis: "Organizing Competency", value: 0.8009 },
-                   { axis: "Teachnological Capability", value: 0.8009 },
-                   { axis: "Financial Competency", value: 0.8009 },
-                   { axis: "Market Share", value: 0.8009 },
-                   { axis: "Social Responsibility", value: 0.8009 },
-                   { axis: "Regional Competitiveness", value: 0.8009 }
-                 ]
-    ];
-    chart(d);
+  .change
+   
+    //var d = [
+    //[
+    //   { axis: "Management Competency", value: 0.8875 },
+    //   { axis: "Organizing Competency", value: 0.7063 },
+    //   { axis: "Teachnological Capability", value: 0.7875 },
+    //   { axis: "Financial Competency", value: 0.8875 },
+    //   { axis: "Market Share", value: 0.8938 },
+    //   { axis: "Social Responsibility", value: 0.7063 },
+    //   { axis: "Regional Competitiveness", value: 0.7375 }
+    //           ], [
+    //   { axis: "Management Competency", value: 0.8009 },
+    //   { axis: "Organizing Competency", value: 0.8009 },
+    //   { axis: "Teachnological Capability", value: 0.8009 },
+    //   { axis: "Financial Competency", value: 0.8009 },
+    //   { axis: "Market Share", value: 0.8009 },
+    //   { axis: "Social Responsibility", value: 0.8009 },
+    //   { axis: "Regional Competitiveness", value: 0.8009 }
+    //           ]
+    //];
+  
+  //  var d = [[
+  //{
+  //    axis: "Năng lực  quản lý",
+  //    value: 0.655
+  //},
+  //{
+  //    axis: "Năng lực tổ chức",
+  //    value: 0.585
+  //},
+  //{
+  //    axis: "Khả năng công nghệ",
+  //    value: 0.4817
+  //},
+  //{
+  //    axis: "Năng lực tài chính",
+  //    value: 0.6219
+  //},
+  //{
+  //    axis: "Thị phần",
+  //    value: 0.5716
+  //},
+  //{
+  //    axis: "Trách nhiệm xã hội",
+  //    value: 0.5678
+  //},
+  //{
+  //    axis: "Khả năng cạnh tranh trong khu vực",
+  //    value: 0.4835
+  //}
+  //  ], [
+  //{
+  //    axis: "Năng lực  quản lý",
+  //    value: 0.56664285714285711
+  //},
+  //{
+  //    axis: "Năng lực tổ chức",
+  //    value: 0.56664285714285711
+  //},
+  //{
+  //    axis: "Khả năng công nghệ",
+  //    value: 0.56664285714285711
+  //},
+  //{
+  //    axis: "Năng lực tài chính",
+  //    value: 0.56664285714285711
+  //},
+  //{
+  //    axis: "Thị phần",
+  //    value: 0.56664285714285711
+  //},
+  //{
+  //    axis: "Trách nhiệm xã hội",
+  //    value: 0.56664285714285711
+  //},
+  //{
+  //    axis: "Khả năng cạnh tranh trong khu vực",
+  //    value: 0.56664285714285711
+  //}
+  //  ]];
+  
     function chart(d) {
+        
         var w = 300,
             h = 300;
         var colorscale = d3.scale.category10();
@@ -68,7 +148,7 @@
         var LegendOptions = ['Trọng số dữ liệu', 'Trọng số trung bình'];
 
         //Data
-       
+     
 
         //Options for the Radar chart, other than default
         var mycfg = {
@@ -89,7 +169,7 @@
             .attr("width", w + 300)
             .attr("height", h)
             .attr("x", -300)
-            .attr("y", -50)
+            .attr("y", -50);
 
         //Create the title for the legend
         var text = svg.append("text")
@@ -132,7 +212,7 @@
           .text(function (d) { return d; })
         ;
     }
-   
+
 
 </script>
 

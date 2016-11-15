@@ -76,5 +76,13 @@ namespace Competitiveness.Models
             MeanWeight = new List<CompetitivenessJson>();
         }
     }
+    public class ChartModel
+    {
+        public string modelChart { get; set; }
+        public ChartModel()
+        {
+
+        }
+    }
    
 }

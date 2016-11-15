@@ -1,0 +1,57 @@
+﻿@model Competitiveness.Criteria
+
+@{
+    ViewBag.Title = "CreateCriteria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="row">
+        <div class="col-md-6">
+            <p>Thêm mới các tiêu chí</p>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">Thêm mới tiêu chí</h4>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <label class="control-label" for="exampleInputText1">Tên tiêu chí cạnh tranh</label>
+
+                            <div class="controls">
+                                @Html.EditorFor(model => model.CriteriaName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.CriteriaName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="exampleInputPassword1">Điểm số</label>
+                            <div class="controls">
+                                @Html.EditorFor(model => model.Score, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Score, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="exampleInputPassword1">Trọng lượng</label>
+                            <div class="controls">
+                                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Lưu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Quay lại", "Index")
+</div>

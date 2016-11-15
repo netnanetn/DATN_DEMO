@@ -33,24 +33,25 @@
     $("select")
       .change(function () {
 
-      
+
 
 
           $("select option:selected").each(function () {
-             
-             
+
+
              // var ids = $(this).val().toString();
-              var idss = ($(this).val()).toString;
+              var idss = ($(this).val()).toString();
               $.ajax({
-                  url: '@Url.Action("PartialViewFactor", "Home", new {id = "1" })',
+                  @*url: '@Url.Action("PartialViewFactor", "Home", new {id = idss })',*@
+                  url: '/Home/PartialViewFactor?id='+idss,
                   type: "GET",
-                  success: function (response) {               
+                  success: function (response) {
                    $("#table_factor").html(response);
                   },
                   error: function () {
                   alert("error occured");
               }
-        
+
           });
 
 

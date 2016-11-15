@@ -134,7 +134,33 @@ namespace Competitiveness.Controllers
             return View(model);
         }
 
+        public ActionResult EditCriteria(int branchId, int factorId, int criteriaId)
+        {
+            var model = new AllModel();
+            var factors = from factor in db.Factors
+                          where factor.FactorId.Equals(factorId)
+                          select factor;
+            foreach (var fa in factors)
+            {
+                model.factor.Add(fa);
+            }
 
+            var criterias = from criteria in db.Criterias
+                            where criteria.CriteriaId.Equals(criteriaId)
+                            select criteria;
+            foreach (var criteria in criterias)
+            {
+                model.criteria.Add(criteria);
+            }
+            var attributes = from attribute in db.Attributes
+                             where attribute.CriteriaId.Equals(criteriaId)
+                             select attribute;
+            foreach (var attribute in attributes)
+            {
+                model.attribute.Add(attribute);
+            }
+            return View(model);
+        }
 
         public ActionResult CreateFactor(int branchId, int companyId = 0)
         {
@@ -165,6 +191,67 @@ namespace Competitiveness.Controllers
                 return View();
             }
         }
+
+        public ActionResult CreateCriteria(int branchId, int factorId)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateCriteria(Criteria criteria)
+        {
+            try
+            {
+                var count = db.Criterias.Max(x => x.Id) + 1;
+                var criteriaSave = new Criteria
+                {
+                    BranchId = criteria.BranchId,
+                    FactorId = criteria.FactorId,
+                    CriteriaId = count,
+                    CriteriaName = criteria.CriteriaName,
+                    Score = criteria.Score,
+                    Weight = criteria.Weight
+                };
+                db.Criterias.Add(criteriaSave);
+                db.SaveChanges();
+                return RedirectToAction("EditFactor", "Branch", new { branchId = criteria.BranchId, factorId = criteria.FactorId });
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+        }
+
+        public ActionResult CreateAttribute(int branchId, int factorId, int criteriaId )
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateAttribute(Attribute attribute)
+        {
+            try
+            {
+                var count = db.Attributes.Max(x => x.Id) + 1;
+                var attributeSave = new Attribute
+                {
+                    BranchId = attribute.BranchId,
+                    FactorId = attribute.FactorId,
+                    CriteriaId = attribute.CriteriaId,
+                    AttributeId = count,
+                    AttributeName = attribute.AttributeName,
+                    Score = attribute.Score,
+                    Weight = attribute.Weight
+                };
+                db.Attributes.Add(attributeSave);
+                db.SaveChanges();
+                return RedirectToAction("EditCriteria", "Branch", new { branchId = attribute.BranchId, factorId = attribute.FactorId, criteriaId = attribute.CriteriaId });
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+        }
+
         // GET: Branch/Delete/5
         public ActionResult Delete(int id)
         {

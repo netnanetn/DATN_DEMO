@@ -220,6 +220,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Criteria.cs">
@@ -524,9 +525,13 @@
     <Content Include="Views\Branch\Edit.cshtml" />
     <Content Include="Views\Branch\EditFactor.cshtml" />
     <Content Include="Views\Branch\CreateFactor.cshtml" />
+    <Content Include="Views\Branch\CreateCriteria.cshtml" />
+    <Content Include="Views\Branch\EditCriteria.cshtml" />
+    <Content Include="Views\Branch\CreateAttribute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Chart\" />
     <Folder Include="Views\Include\" />
   </ItemGroup>
   <ItemGroup>

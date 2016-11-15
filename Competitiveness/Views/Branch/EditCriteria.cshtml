@@ -1,16 +1,17 @@
 ﻿@model Competitiveness.Models.AllModel
 @{
-    ViewBag.Title = "EditFactor";
+    ViewBag.Title = "EditCriteria";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title"><b>Trọng số các yếu tố cạnh tranh</b></h4>
         <p style="float:right">
 
-            @foreach (var item in Model.factor)
+            @foreach (var item in Model.criteria)
             {
-                @Html.ActionLink("Thêm tiêu chí đánh giá", "CreateCriteria", new { branchId = item.BranchId, factorId = item.FactorId })
+                @Html.ActionLink("Thêm thuộc tính đánh giá", "CreateAttribute", new { branchId = item.BranchId, factorId = item.FactorId, criteriaId = item.CriteriaId })
             }
         </p>
     </div>
@@ -129,3 +130,4 @@
         </table>
     </div>
 </div>
+
