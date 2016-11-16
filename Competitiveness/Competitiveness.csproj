@@ -253,6 +253,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\demo.css" />
+    <Content Include="Content\Images\competitiveness.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -528,10 +529,12 @@
     <Content Include="Views\Branch\CreateCriteria.cshtml" />
     <Content Include="Views\Branch\EditCriteria.cshtml" />
     <Content Include="Views\Branch\CreateAttribute.cshtml" />
+    <Content Include="Views\Chart\ChartFactor.cshtml" />
+    <Content Include="Views\Chart\ChartCriteria.cshtml" />
+    <Content Include="Views\Chart\Chart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Chart\" />
     <Folder Include="Views\Include\" />
   </ItemGroup>
   <ItemGroup>

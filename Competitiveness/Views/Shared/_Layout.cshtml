@@ -15,12 +15,15 @@
     <link rel="stylesheet" href="~/Veneto/dist/css/plugins/rickshaw.min.css">
     <link rel="stylesheet" href="~/Veneto/dist/css/plugins/morris.min.css">
 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   
     @* d3 chart *@
     <script src="~/Scripts/D3Chart/RadarChart.js"></script>
     <script src="~/Scripts/D3Chart/d3.v3.js"></script>
+
 </head>
 <body>
     <header>
@@ -44,16 +47,11 @@
     </header>
     <div class="page-wrapper">
         <aside class="sidebar sidebar-default">
-            <div class="sidebar-profile">
-                <img class="img-circle profile-image" src="~/Veneto/demo/images/logo2.png">
-                <div class="profile-body">
-                    <h4>PhongKa</h4>
-                </div>
-            </div>
+           
             <nav>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="nav-dropdown active open">
-                        <a href="#" title="Dashboards">
+                        <a href="/Home/Index" title="Dashboards">
                             <i class="fa fa-lg fa-fw fa-home"></i> Trang chủ
                         </a>
                  
@@ -108,23 +106,23 @@
                         </a>
                         <ul class="nav-sub">
                             <li>
-                                <a href="charts-rickshaw.html" title="Rickshaw Charts">
-                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ yếu tố
+                                <a href="/Chart/Chart" title="Sparkline Charts">
+                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ so sánh từng yếu tố
                                 </a>
                             </li>
                             <li>
-                                <a href="charts-flot.html" title="Flot Charts">
-                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ 20 tiêu chí có trọng số cao nhất
+                                <a href="/Chart/ChartFactor" title="Rickshaw Charts">
+                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ trọng số mức 1(yếu tố)
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Chart/ChartCriteria" title="Flot Charts">
+                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ trọng số mức 2(tiêu chí)
                                 </a>
                             </li>
                             <li>
                                 <a href="charts-morris.html" title="Morris.js Charts">
-                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ 20 thuộc tính có trọng số cao nhất
-                                </a>
-                            </li>
-                            <li>
-                                <a href="charts-sparkline.html" title="Sparkline Charts">
-                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ so sánh
+                                    <i class="fa fa-fw fa-caret-right"></i> Biểu đồ trọng số mức 3(thuộc tính)
                                 </a>
                             </li>
                         </ul>
@@ -189,9 +187,6 @@
                 </div>
             </div>
     </div>
-
-   
-
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

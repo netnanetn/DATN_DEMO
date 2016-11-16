@@ -58,6 +58,14 @@ namespace Competitiveness.Models
             branch = new List<Branch>();
         }
     }
+    public class ListModel
+    {
+        public List<AllModel> listModel { get; set; }
+        public ListModel()
+        {
+            listModel = new List<AllModel>();
+        }
+    }
 
     public class CompetitivenessJson{
         [JsonProperty("axis")]

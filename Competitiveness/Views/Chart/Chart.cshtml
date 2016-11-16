@@ -1,0 +1,166 @@
+﻿@model Competitiveness.Models.ListModel
+@{
+    ViewBag.Title = "Chart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+.dropdown-submenu {
+position: relative;
+}
+.dropdown-submenu .dropdown-menu {
+top: 0;
+left: 100%;
+margin-top: -1px;
+}
+.chart {
+height: 1000px;
+text-align: center;
+margin-top: 100px;
+}
+.chart polygon {
+fill-opacity: 0 !important;
+}
+.chart svg:not(:root) {
+overflow: visible;
+}
+</style>
+
+
+
+<div class="page-heading page-heading-md" style="background-image:url(/Content/Images/competitiveness.jpg)">
+    <div class="container">
+        <h2>Biểu đồ trọng số theo các yếu tố cạnh tranh</h2>
+
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                Chọn ngành
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                @foreach (var item in Model.listModel)
+            {
+                foreach (var branch in item.branch)
+                {
+                        <li class="dropdown-submenu">
+                            <a class="test" tabindex="-1" href="#">@branch.BranchName <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                @foreach (var factor in item.factor)
+                                {
+                                    <li><a tabindex="-1" onclick="selectFunction(@factor.BranchId,@factor.FactorId,'@factor.FactorName')">@factor.FactorName</a></li>
+                                }
+                            </ul>
+                        </li>
+                    }
+
+                }
+            </ul>
+        </div>
+    </div>
+    <br />
+    <div id="chart" class="chart"></div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('.dropdown-submenu a.test').on("click", function (e) {
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+        });
+    });
+
+    function selectFunction(branchId, factorId, factorName) {
+        console.log(factorName);
+        $.ajax({
+            url: '/Chart/GetDataFactorAndCriteriaJson?branchId=' + branchId + '&factorId=' + factorId,
+            type: "GET",
+            dataType: 'text',
+            success: function (response) {
+                var d = JSON.parse(response);
+                chart(d, factorName);
+            },
+            error: function () {
+                alert("error occured");
+            }
+        });
+    }
+
+
+    function chart(d, factorName) {
+
+        var w = 500,
+            h = 500;
+        var colorscale = d3.scale.category10();
+        //Legend titles
+        var LegendOptions = ['Trọng số dữ liệu', 'Trọng số trung bình'];
+
+        //Data
+
+
+        //Options for the Radar chart, other than default
+        var mycfg = {
+            w: w,
+            h: h,
+            maxValue: 1,
+            levels: 10,
+            ExtraWidthX: 300
+        }
+
+        //Call function to draw the Radar chart
+        //Will expect that data is in %'s
+        RadarChart.draw("#chart", d, mycfg);
+
+        var svg = d3.select('#chart')
+            .selectAll('svg')
+            .append('svg')
+            .attr("width", w + 300)
+            .attr("height", h)
+            .attr("x", -500)
+            .attr("y", -50);
+
+        //Create the title for the legend
+        var text = svg.append("text")
+            .attr("class", "title")
+            .attr('transform', 'translate(90,0)')
+            .attr("x", w - 70)
+            .attr("y", 10)
+            .attr("font-size", "12px")
+            .attr("fill", "#404040")
+            .text("Biểu đồ 4.1 Trọng lượng của tầm quan trọng(màu đỏ) và trọng lượng có nghĩa của các tiêu chí (màu xanh) của yếu tố " + factorName);
+
+        //Initiate Legend
+        var legend = svg.append("g")
+            .attr("class", "legend")
+            .attr("height", 100)
+            .attr("width", 200)
+            .attr('transform', 'translate(90,20)')
+        ;
+        //Create colour squares
+        legend.selectAll('rect')
+          .data(LegendOptions)
+          .enter()
+          .append("rect")
+          .attr("x", w - 65)
+          .attr("y", function (d, i) { return i * 20; })
+          .attr("width", 10)
+          .attr("height", 10)
+          .style("fill", function (d, i) { return colorscale(i); })
+        ;
+
+        //Create text next to squares
+        legend.selectAll('text')
+          .data(LegendOptions)
+          .enter()
+          .append("text")
+          .attr("x", w - 52)
+          .attr("y", function (d, i) { return i * 20 + 9; })
+          .attr("font-size", "11px")
+          .attr("fill", "#737373")
+          .text(function (d) { return d; })
+        ;
+    }
+
+</script>

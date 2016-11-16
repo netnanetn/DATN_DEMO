@@ -1,4 +1,8 @@
-﻿@model Competitiveness.Models.AllModel
+﻿@model IEnumerable<Competitiveness.Branch>
+@{
+    ViewBag.Title = "ChartCriteria";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <style>
     .chart {
         height: 1000px;
@@ -6,11 +10,11 @@
         margin-top: 100px;
     }
 
-        .chart polygon {
+    .chart polygon {
             fill-opacity: 0 !important;
         }
 
-        .chart svg:not(:root) {
+    .chart svg:not(:root) {
             overflow: visible;
         }
 </style>
@@ -20,11 +24,10 @@
         <div class="col-md-12">
             @* not me *@
             <select name="sweets">
-                @foreach (var item in Model.branch)
+                @foreach (var item in Model)
                 {
                     <option value="@item.BranchId">@item.BranchName</option>
                 }
-                <option>Tạo mới dữ liệu</option>
             </select>
         </div>
     </div>
@@ -37,38 +40,39 @@
     <div id="chart" class="chart"></div>
 </div>
 <script type="text/javascript">
-  
+
     $("select").change(function () {
-      $("select option:selected").each(function () {
-          // var ids = $(this).val().toString();
-          var idss = ($(this).val()).toString;
-          $.ajax({
-              url: '@Url.Action("GetDataJson", "Chart", new {id = 1 })',
-              type: "GET",
-              dataType: 'text',
-              success: function (response) {
-                  var d = JSON.parse(response);
-                   chart(d);
-              },
-              error: function () {
-                  alert("error occured");
-              }
-          });
-      });
-      //
-  })
+        $("select option:selected").each(function () {
+            // var ids = $(this).val().toString();
+            var id = $(this).val();
+            $.ajax({
+                @*url: '@Url.Action("GetDataJson", "Chart", new {id = 1 })',*@
+                url: '/Chart/GetDataCriteriaJson?id=' + id,
+                type: "GET",
+                dataType: 'text',
+                success: function (response) {
+                    var d = JSON.parse(response);
+                    chart(d);
+                },
+                error: function () {
+                    alert("error occured");
+                }
+            });
+        });
+        //
+    })
   .change
-   
+
     function chart(d) {
-        
-        var w = 300,
-            h = 300;
+
+        var w = 900,
+            h = 900;
         var colorscale = d3.scale.category10();
         //Legend titles
         var LegendOptions = ['Trọng số dữ liệu', 'Trọng số trung bình'];
 
         //Data
-     
+
 
         //Options for the Radar chart, other than default
         var mycfg = {
@@ -88,8 +92,8 @@
             .append('svg')
             .attr("width", w + 300)
             .attr("height", h)
-            .attr("x", -300)
-            .attr("y", -50);
+            .attr("x", -800)
+            .attr("y", -70);
 
         //Create the title for the legend
         var text = svg.append("text")
@@ -99,7 +103,7 @@
             .attr("y", 10)
             .attr("font-size", "12px")
             .attr("fill", "#404040")
-            .text("Figure 4.1 Indicates thae weight of importance (in red) and means weight of factors (blue colour) at the First Level");
+            .text("Biểu đồ 4.1 Trọng lượng của tầm quan trọng(màu đỏ) và trọng lượng có nghĩa của các yếu tố (màu xanh) ở cấp độ thứ 2.");
 
         //Initiate Legend
         var legend = svg.append("g")
@@ -135,4 +139,3 @@
 
 
 </script>
-

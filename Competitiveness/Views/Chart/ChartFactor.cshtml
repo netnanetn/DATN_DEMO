@@ -1,4 +1,8 @@
-﻿@model Competitiveness.Models.AllModel
+﻿@model IEnumerable<Competitiveness.Branch>
+@{
+    ViewBag.Title = "ChartFactor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <style>
     .chart {
         height: 1000px;
@@ -14,36 +18,36 @@
             overflow: visible;
         }
 </style>
-<div class="container-fluid-md">
-    <div class="row">
-        <p class="">Lựa chọn ngành để xem chỉ số cạnh tranh</p>
-        <div class="col-md-12">
-            @* not me *@
-            <select name="sweets">
-                @foreach (var item in Model.branch)
-                {
-                    <option value="@item.BranchId">@item.BranchName</option>
-                }
-                <option>Tạo mới dữ liệu</option>
-            </select>
-        </div>
-    </div>
-</div>
-<br />
+
 
 <div class="page-heading page-heading-md" style="background-color:rgba(68, 157, 68, 0.52)">
-
+    <div class="container-fluid-md">
+        <div class="row">
+            <p class="">Lựa chọn ngành để xem chỉ số cạnh tranh</p>
+            <div class="col-md-12">
+                @* not me *@
+                <select name="sweets">
+                    <option value="" selected>Lựa chọn ngành để xem biểu đồ</option>
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.BranchId">@item.BranchName</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
     <br />
     <div id="chart" class="chart"></div>
 </div>
 <script type="text/javascript">
-  
+
     $("select").change(function () {
       $("select option:selected").each(function () {
           // var ids = $(this).val().toString();
-          var idss = ($(this).val()).toString;
+          var id = $(this).val();
           $.ajax({
-              url: '@Url.Action("GetDataJson", "Chart", new {id = 1 })',
+              @*url: '@Url.Action("GetDataJson", "Chart", new {id = 1 })',*@
+              url: '/Chart/GetDataFactorJson?id=' + id,
               type: "GET",
               dataType: 'text',
               success: function (response) {
@@ -58,19 +62,15 @@
       //
   })
   .change
-   
+
     function chart(d) {
-        
+
         var w = 300,
             h = 300;
         var colorscale = d3.scale.category10();
         //Legend titles
         var LegendOptions = ['Trọng số dữ liệu', 'Trọng số trung bình'];
 
-        //Data
-     
-
-        //Options for the Radar chart, other than default
         var mycfg = {
             w: w,
             h: h,
@@ -79,8 +79,6 @@
             ExtraWidthX: 300
         }
 
-        //Call function to draw the Radar chart
-        //Will expect that data is in %'s
         RadarChart.draw("#chart", d, mycfg);
 
         var svg = d3.select('#chart')
@@ -91,7 +89,6 @@
             .attr("x", -300)
             .attr("y", -50);
 
-        //Create the title for the legend
         var text = svg.append("text")
             .attr("class", "title")
             .attr('transform', 'translate(90,0)')
@@ -99,16 +96,14 @@
             .attr("y", 10)
             .attr("font-size", "12px")
             .attr("fill", "#404040")
-            .text("Figure 4.1 Indicates thae weight of importance (in red) and means weight of factors (blue colour) at the First Level");
+            .text("Biểu đồ 4.1 Trọng lượng của tầm quan trọng(màu đỏ) và trọng lượng có nghĩa của các yếu tố (màu xanh) ở cấp độ đầu tiên.");
 
-        //Initiate Legend
         var legend = svg.append("g")
             .attr("class", "legend")
             .attr("height", 100)
             .attr("width", 200)
             .attr('transform', 'translate(90,20)')
         ;
-        //Create colour squares
         legend.selectAll('rect')
           .data(LegendOptions)
           .enter()
@@ -120,7 +115,6 @@
           .style("fill", function (d, i) { return colorscale(i); })
         ;
 
-        //Create text next to squares
         legend.selectAll('text')
           .data(LegendOptions)
           .enter()
