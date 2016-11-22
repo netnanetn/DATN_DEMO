@@ -35,5 +35,7 @@ namespace Competitiveness.Models
         public System.Data.Entity.DbSet<Competitiveness.Factor> Factors { get; set; }
 
         public System.Data.Entity.DbSet<Competitiveness.Criteria> Criteria { get; set; }
+
+        public System.Data.Entity.DbSet<Competitiveness.Attribute> Attributes { get; set; }
     }
 }

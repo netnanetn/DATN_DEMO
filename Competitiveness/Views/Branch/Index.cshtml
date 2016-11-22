@@ -5,35 +5,35 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="panel panel-default">
+    <button class="btn btn-default" style="float:right; margin: 5px;">
+        @Html.ActionLink("Tạo mới", "Create")
+    </button>
+    <table class="table table-striped dataTable">
+        <tr>
+            <th hidden>
+                @Html.DisplayNameFor(model => model.BranchId)
+            </th>
+            <th>
+                Tên ngành
+            </th>
+            <th></th>
+        </tr>
 
-
-<p style="float:right">
-    @Html.ActionLink("Tạo mới", "Create")
-</p>
-<table class="table table-striped dataTable">
-    <tr>
-        <th hidden>
-            @Html.DisplayNameFor(model => model.BranchId)
-        </th>
-        <th>
-            Tên ngành
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td hidden>
-            @Html.DisplayFor(modelItem => item.BranchId)
-        </td>
-        <td>
-            @Html.ActionLink(item.BranchName, "Edit", new { branchId = item.BranchId })
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+        @foreach (var item in Model) {
+        <tr>
+            <td hidden>
+                @Html.DisplayFor(modelItem => item.BranchId)
+            </td>
+            <td>
+                @Html.ActionLink(item.BranchName, "Edit", new { branchId = item.BranchId })
+            </td>
+            <td>
+                @Html.ActionLink("Chi tiết", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Xóa", "Delete", new { id=item.Id })
+            </td>
+        </tr>
 }
 
-</table>
+    </table>
+</div>

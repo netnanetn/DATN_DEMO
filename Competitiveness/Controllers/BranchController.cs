@@ -91,7 +91,7 @@ namespace Competitiveness.Controllers
 
         // POST: Branch/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(AllModel allModel)
         {
             try
             {
@@ -104,7 +104,80 @@ namespace Competitiveness.Controllers
                 return View();
             }
         }
+        [HttpGet]
+        public ActionResult EditFactorPartial(int Id)
+        {
+            Factor fc = new Factor();
+            fc = db.Factors.Find(Id);
+            return PartialView("EditFactorPartial", fc);
+        }
+        [HttpPost]
+        public ActionResult EditFactorPartial(Factor factor)
+        {
+            try
+            {
+                Factor fc = db.Factors.Find(factor.Id);
+                fc.FactorName = factor.FactorName;
+                fc.Score = factor.Score;
+                fc.Weight = factor.Weight;
+                db.SaveChanges();
+              return  RedirectToAction("Edit", new { branchId = factor.BranchId});
+            }catch(Exception ex)
+            {
+                return PartialView("EditFactorPartial", factor);
+            }
+        }
 
+        [HttpGet]
+        public ActionResult EditCriteriaPartial(int Id)
+        {
+            Criteria cr = new Criteria();
+            cr = db.Criterias.Find(Id);
+            return PartialView("EditCriteriaPartial",cr);
+        }
+        [HttpPost]
+        public ActionResult EditCriteriaPartial(Criteria criteria)
+        {
+            try
+            {
+                Criteria cr = db.Criterias.Find(criteria.Id);
+                cr.CriteriaName = criteria.CriteriaName;
+                cr.Score = criteria.Score;
+                cr.Weight = criteria.Weight;
+                db.SaveChanges();
+                return RedirectToAction("Edit", new { branchId = criteria.BranchId });
+            }
+            catch (Exception ex)
+            {
+                return PartialView("EditCriteriaPartial", criteria);
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult EditAttributePartial(int Id)
+        {
+            Attribute at = new Attribute();
+            at = db.Attributes.Find(Id);
+            return PartialView("EditAttributePartial", at);
+        }
+        [HttpPost]
+        public ActionResult EditAttributePartial(Attribute attribute)
+        {
+            try
+            {
+                Attribute at = db.Attributes.Find(attribute.Id);
+                at.AttributeName = attribute.AttributeName;
+                at.Score = attribute.Score;
+                at.Weight = attribute.Weight;
+                db.SaveChanges();
+                return RedirectToAction("Edit", new { branchId = attribute.BranchId});
+            }
+            catch (Exception ex)
+            {
+                return PartialView("EditAttributePartial", attribute);
+            }
+        }
         //EditBranch
         public ActionResult EditFactor(int branchId, int factorId)
         {
@@ -253,14 +326,14 @@ namespace Competitiveness.Controllers
         }
 
         // GET: Branch/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteFactor(int id)
         {
             return View();
         }
 
         // POST: Branch/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult DeleteFactor(int id, FormCollection collection)
         {
             try
             {

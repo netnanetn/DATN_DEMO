@@ -10,10 +10,14 @@
         @Html.AntiForgeryToken()
 
         <div class="row">
-            <div class="col-md-6">
-                <p>Thêm mới chuyên ngành để tạo dữ liệu mẫu</p>
+            <div class="col-md-3">
+                <p><b>Thêm mới chuyên ngành</b></p>
+                <p>
+                    Chuyên ngành được thêm sẽ là mục tiêu để nghiên cứu và đánh giá khả năng cạnh tranh<br />
+                    
+                </p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">Thêm mới chuyên ngành</h4>
@@ -34,6 +38,10 @@
                                 </div>
                             </div>
                             <button class="btn btn-primary" type="submit">Lưu</button>
+                            <button class="btn btn-default" style="float:right">
+                                    @Html.ActionLink("Quay lại", "Index")
+                                
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -41,7 +49,5 @@
         </div>
     }
 
-    <div style="float:right">
-        @Html.ActionLink("Quay lại", "Index")
-    </div>
+    
 </div>
