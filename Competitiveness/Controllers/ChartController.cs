@@ -341,8 +341,9 @@ namespace Competitiveness.Controllers
 
                 models.listModel.Add(model);
             }
-
-
+            var maxWeightCriteria = (double)db.Criterias.Where(x=>x.BranchId==1).Max(x => x.Weight);
+           // models.MaxValueAttribute = maxWeightCriteria;
+            models.MaxValueAttribute = 0.04;
             return View(models);
         }
 

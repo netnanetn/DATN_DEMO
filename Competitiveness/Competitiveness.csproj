@@ -355,6 +355,7 @@
     <Content Include="Veneto\dist\assets\plugins\jquery-datatables\js\dataTables.bootstrap.js" />
     <Content Include="Veneto\dist\assets\plugins\jquery-datatables\js\dataTables.tableTools.js" />
     <Content Include="Veneto\dist\assets\plugins\jquery-datatables\js\jquery.dataTables.js" />
+    <Content Include="Veneto\dist\assets\plugins\jquery-datatables\js\jquery.treetable.js" />
     <Content Include="Veneto\dist\assets\plugins\jquery-icheck\icheck.min.js" />
     <Content Include="Veneto\dist\assets\plugins\jquery-icheck\skins\all.css" />
     <Content Include="Veneto\dist\assets\plugins\jquery-icheck\skins\flat\aero%402x.png" />
@@ -537,6 +538,7 @@
     <Content Include="Views\Branch\EditFactorPartial.cshtml" />
     <Content Include="Views\Branch\EditCriteriaPartial.cshtml" />
     <Content Include="Views\Branch\EditAttributePartial.cshtml" />
+    <Content Include="Views\Branch\EditManyAttribute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -10,18 +10,72 @@
         margin-top: -25px;
         z-index: 99;
     }
+
+    .edit-multil-row {
+        margin-left: 709px;
+        position: absolute;
+        margin-top: -25px;
+        z-index: 99;
+    }
+
+    .sync-data {
+        margin-left: 610px;
+        position: absolute;
+        margin-top: -25px;
+        z-index: 99;
+    }
+
+    .treetable-expanded > td:first-child,
+    .treetable-collapsed > td:first-child {
+        padding-left: 2em;
+    }
+
+        .treetable-expanded > td:first-child > .treetable-expander,
+        .treetable-collapsed > td:first-child > .treetable-expander {
+            top: 0.05em;
+            position: relative;
+            margin-left: -1.5em;
+            margin-right: 0.25em;
+        }
+
+    .treetable-expanded .treetable-expander,
+    .treetable-expanded .treetable-expander {
+        width: 1em;
+        height: 1em;
+        cursor: pointer;
+        position: relative;
+        display: inline-block;
+    }
+
+    .treetable-depth-1 > td:first-child {
+        padding-left: 3em;
+    }
+
+    .treetable-depth-2 > td:first-child {
+        padding-left: 4.5em;
+    }
+
+    .treetable-depth-3 > td:first-child {
+        padding-left: 6em;
+    }
 </style>
 
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title"><b>Trọng số các yếu tố cạnh tranh</b></h4>
+        <button class="btn btn-default sync-data" id="syncData" data-id="@Model.branch[0].BranchId">
+            <i class="fa fa-refresh"> Đồng bộ</i>
+        </button>
+        <button class="btn btn-default edit-multil-row">
+            @Html.ActionLink("Chỉnh sửa nhiều thuộc tính", "EditManyAttribute", new { branchId = Model.branch[0].BranchId })
+        </button>
         <button class="btn btn-default" id="btnCreateFactor">
             @Html.ActionLink("Tạo mới yếu tố", "CreateFactor", new { branchId = Model.branch[0].BranchId })
         </button>
     </div>
     <div class="panel-body" style="background-color: #f5f5f5">
 
-        <table id="table-basic" class="table table-striped dataTable" role="grid" aria-describedby="table-basic_info">
+        <table id="table-basic" class="table tree table-inverse" role="grid" aria-describedby="table-basic_info">
             <thead>
                 <tr role="row" style="background: blue">
                     <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Yếu tố cạnh tranh</th>
@@ -37,7 +91,7 @@
 
                 @foreach (var item in Model.factor)
             {
-                    <tr>
+                    <tr data-node="treetable-@item.FactorId" data-pnode="">
                         <td id="itemId" class="itemIdClass tblColumn" hidden></td>
                         <td class="hidden">
                             @Html.DisplayFor(modelItem => item.Id)
@@ -50,6 +104,7 @@
                         </td>
                         <td style="background: rgb(7, 189, 113);">
                             @*@Html.DisplayFor(modelItem => item.FactorName)*@
+                            <span class="treetable-expander fa fa-angle-down"></span>
                             @Html.ActionLink(item.FactorName, "EditFactor", new { branchId = item.BranchId, factorId = item.FactorId })
                         </td>
                         <td></td>
@@ -63,7 +118,7 @@
                         <td>
                             @*@Html.ActionLink("Delete", "DeleteFactor", new { branchId = item.BranchId, factorId = item.FactorId })*@
                             <a href="javascript:void(0);" class="btn-edit-factor" data-id="@item.Id"><i class="fa fa-pencil" aria-hidden="true" title="Chỉnh sửa"></i></a>
-                            @*<button class="btn btn-primary" onclick="editFactor(@item.Id)">Edit</button>*@
+                            <a href="javascript:void(0);" class="btn-delete-factor" data-id="@item.Id"><i class="fa fa-trash-o" aria-hidden="true" title="Xóa"></i></a>
                         </td>
                     </tr>
 
@@ -71,7 +126,7 @@
                     {
                         if (citem.FactorId == item.FactorId)
                         {
-                            <tr class="table-criteria">
+                            <tr data-node="treetable-01" data-pnode="treetable-@citem.FactorId">
                                 <td id="itemId" class="itemIdClass tblColumn" hidden></td>
                                 <td class="hidden">
                                     @Html.DisplayFor(modelItem => citem.Id)
@@ -86,6 +141,7 @@
                                 <td style="background:#35d2a0">
 
                                     @*@Html.DisplayFor(modelItem => citem.CriteriaName)*@
+                                    @*<span class="treetable-expander fa fa-angle-down"></span>*@
                                     @Html.ActionLink(citem.CriteriaName, "EditCriteria", new { branchId = citem.BranchId, factorId = citem.FactorId, criteriaId = citem.CriteriaId })
                                 </td>
                                 <td></td>
@@ -97,6 +153,7 @@
                                 </td>
                                 <td>
                                     <a href="javascript:void(0);" class="btn-edit-criteria" data-id="@citem.Id"><i class="fa fa-pencil" aria-hidden="true" title="Chỉnh sửa"></i></a>
+                                    <a href="javascript:void(0);" class="btn-delete-criteria" data-id="@citem.Id"><i class="fa fa-trash-o" aria-hidden="true" title="Xóa"></i></a>
                                 </td>
                             </tr>
                             foreach (var aitem in Model.attribute)
@@ -104,7 +161,7 @@
                                 if (aitem.CriteriaId == citem.CriteriaId)
                                 {
 
-                                    <tr class="table-attribute">
+                                    <tr data-node="treetable-@citem.CriteriaId" data-pnode="treetable-@aitem.FactorId">
                                         <td id="itemId" class="itemIdClass tblColumn" hidden></td>
                                         <td class="hidden">
                                             @Html.DisplayFor(modelItem => aitem.Id)
@@ -129,6 +186,7 @@
                                         </td>
                                         <td>
                                             <a href="javascript:void(0);" class="btn-edit-attribute" data-id="@aitem.Id"><i class="fa fa-pencil" aria-hidden="true" title="Chỉnh sửa"></i></a>
+                                            <a href="javascript:void(0);" class="btn-delete-attribute" data-id="@aitem.Id"><i class="fa fa-trash-o" aria-hidden="true" title="Xóa"></i></a>
                                         </td>
                                     </tr>
                                 }
@@ -154,7 +212,11 @@
 
 </div>
 <script>
+    $(document).ready(function () {
 
+        $('.table').treeTable();
+
+    });
     $(function () {
 
         $(".btn-edit-factor").click(function () {
@@ -199,6 +261,86 @@
         $("#btnClose").click(function () {
             $('#myModal').modal('hide');
         });
+
+        $(".btn-delete-factor").click(function () {
+            var $buttonClicked = $(this);
+            var url = '/Branch/DeleteFactor';
+            var id = $buttonClicked.attr('data-id');
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function () {
+                    window.location.reload();
+                    alert("Xóa dữ liệu thành công");
+                },
+                error: function () {
+                    alert("Lỗi xóa dữ liệu.");
+                }
+            });
+        });
+        $(".btn-delete-criteria").click(function () {
+            var $buttonClicked = $(this);
+            var url = '/Branch/DeleteCriteria';
+            var id = $buttonClicked.attr('data-id');
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function () {
+                    window.location.reload();
+                    alert("Xóa dữ liệu thành công");
+                },
+                error: function () {
+                    alert("Lỗi xóa dữ liệu.");
+                }
+            });
+        });
+        $(".btn-delete-attribute").click(function () {
+            var $buttonClicked = $(this);
+            var url = '/Branch/DeleteAttribute';
+            var id = $buttonClicked.attr('data-id');
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function () {
+                    window.location.reload();
+                    alert("Xóa dữ liệu thành công");
+                },
+                error: function () {
+                    alert("Lỗi xóa dữ liệu.");
+                }
+            });
+        });
+        $("#syncData").click(function () {
+            var id = $(this).attr('data-id');
+            var url = '/Branch/SyncDataFromSurvey';
+           $.ajax({
+               type: "GET",
+               url: url,
+               contentType: "application/json; charset=utf-8",
+               data: { "branchId": id },
+               datatype: "json",
+               success: function () {
+                   window.location.reload();
+                   alert("Đồng bộ thành công");
+               },
+               error: function () {
+                   alert("Lỗi đồng bộ dữ liệu.");
+               }
+           });
+        })
+
+
+
+
     });
 
 </script>  
