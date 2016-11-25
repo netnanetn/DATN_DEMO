@@ -539,6 +539,7 @@
     <Content Include="Views\Branch\EditCriteriaPartial.cshtml" />
     <Content Include="Views\Branch\EditAttributePartial.cshtml" />
     <Content Include="Views\Branch\EditManyAttribute.cshtml" />
+    <Content Include="Views\Branch\EditBranchPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

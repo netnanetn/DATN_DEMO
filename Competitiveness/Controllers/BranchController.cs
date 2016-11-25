@@ -154,7 +154,6 @@ namespace Competitiveness.Controllers
             }
         }
 
-
         [HttpGet]
         public ActionResult EditAttributePartial(int Id)
         {
@@ -179,6 +178,31 @@ namespace Competitiveness.Controllers
                 return PartialView("EditAttributePartial", attribute);
             }
         }
+
+        [HttpGet]
+        public ActionResult EditBranchPartial(int Id)
+        {
+            Branch branch = new Branch();
+            branch = db.Branchs.Find(Id);
+            return PartialView("EditBranchPartial", branch);
+        }
+        [HttpPost]
+        public ActionResult EditBranchPartial(Branch branch)
+        {
+            try
+            {
+                Branch br = db.Branchs.Find(branch.Id);
+                br.BranchName = branch.BranchName;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return PartialView("EditBranchPartial", branch);
+            }
+        }
+
+
         //EditBranch
         public ActionResult EditFactor(int branchId, int factorId)
         {
@@ -280,19 +304,19 @@ namespace Competitiveness.Controllers
                 {
                     var fc = db.Factors.Find(factor.Id);
                     fc.FactorName = factor.FactorName;
-                    fc.Score = factor.Score;
+                    fc.Weight = factor.Weight;
                 }
                 foreach (var criteria in allModel.criteria)
                 {
                     var cr = db.Criterias.Find(criteria.Id);
                     cr.CriteriaName = criteria.CriteriaName;
-                    cr.Score = criteria.Score;
+                    cr.Weight = criteria.Weight;
                 }
                 foreach (var attribute in allModel.attribute)
                 {
                     var at = db.Attributes.Find(attribute.Id);
                     at.AttributeName = attribute.AttributeName;
-                    at.Score = attribute.Score;
+                    at.Weight = attribute.Weight;
                 }
                 db.SaveChanges();
                 return RedirectToAction("Edit", "Branch", new { branchId = branchId });
@@ -404,24 +428,23 @@ namespace Competitiveness.Controllers
 
                 var criterias = db.Criterias.Where(x => x.BranchId == branchId && x.FactorId == factor.FactorId);
                 var totalWeightCriteria = criterias.Sum(x => x.Weight);
-                factor.Score = criterias.Sum(x => x.Score);
+              
                
                 foreach (var criteria in criterias)
                 {
                     var weightOfCriteria = (double)(criteria.Weight / totalWeightCriteria);//trọng lượng của từng tiêu chí theo %
-                    var attributes = db.Attributes.Where(x => x.BranchId == branchId && x.CriteriaId == criteria.CriteriaId);
+                    var attributes = db.Attributes.Where(x => x.BranchId == branchId && x.CriteriaId == criteria.CriteriaId && x.FactorId == factor.FactorId);
                     var totalWeightAttribute = attributes.Sum(x => x.Weight);
-                    criteria.Score = attributes.Sum(x => x.Score);
+                   
                     foreach (var attribute in attributes)
                     {
                         var weightOfAttribute = (double)(attribute.Weight / totalWeightAttribute);
                         var attributeScore = attribute.Weight * 5 * weightOfAttribute * weightOfCriteria * weightOfFactor;
                         attribute.Score = Math.Round((double)(attributeScore), 4, MidpointRounding.AwayFromZero);
-
-
                     }
+                    criteria.Score = attributes.Sum(x => x.Score);
                 }
-
+                factor.Score = criterias.Sum(x => x.Score);
 
             }
 
@@ -517,6 +540,29 @@ namespace Competitiveness.Controllers
                 db.SaveChanges();
 
                 return RedirectToAction("Edit", new { branchId = branchId });
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public ActionResult DeleteBranch(int id)
+        {
+            try
+            {
+                Branch br = db.Branchs.Find(id);
+                var factors = db.Factors.Where(x => x.BranchId == br.BranchId);
+                var criterias = db.Criterias.Where(x => x.BranchId == br.BranchId);
+                var attributes = db.Attributes.Where(x => x.BranchId == br.BranchId);
+                // đoạn này mở sau khi làm phần xác nhận đã
+                //db.Attributes.RemoveRange(attributes);
+                //db.Criterias.RemoveRange(criterias);
+                //db.Factors.RemoveRange(factors);
+                //db.SaveChanges();
+
+                return RedirectToAction("Index");
             }
             catch
             {

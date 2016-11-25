@@ -215,6 +215,24 @@
     $(document).ready(function () {
 
         $('.table').treeTable();
+        $("#syncData").click(function () {
+            var id = $(this).attr('data-id');
+            var url = '/Branch/SyncDataFromSurvey';
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "branchId": id },
+                datatype: "json",
+                success: function () {
+                    window.location.reload();
+                    alert("Đồng bộ thành công");
+                },
+                error: function () {
+                    alert("Lỗi đồng bộ dữ liệu.");
+                }
+            });
+        });
 
     });
     $(function () {
@@ -319,24 +337,7 @@
                 }
             });
         });
-        $("#syncData").click(function () {
-            var id = $(this).attr('data-id');
-            var url = '/Branch/SyncDataFromSurvey';
-           $.ajax({
-               type: "GET",
-               url: url,
-               contentType: "application/json; charset=utf-8",
-               data: { "branchId": id },
-               datatype: "json",
-               success: function () {
-                   window.location.reload();
-                   alert("Đồng bộ thành công");
-               },
-               error: function () {
-                   alert("Lỗi đồng bộ dữ liệu.");
-               }
-           });
-        })
+      
 
 
 

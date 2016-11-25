@@ -61,9 +61,6 @@ namespace Competitiveness.Models
     public class ListModel
     {
         public List<AllModel> listModel { get; set; }
-        public double MaxValueFactor { get; set; }
-        public double MaxValueCriteria { get; set; }
-        public double MaxValueAttribute { get; set; }
 
         public ListModel()
         {

@@ -29,11 +29,74 @@
                 @Html.ActionLink(item.BranchName, "Edit", new { branchId = item.BranchId })
             </td>
             <td>
-                @Html.ActionLink("Chi tiết", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Xóa", "Delete", new { id=item.Id })
+                <a href="javascript:void(0);" class="btn-edit-branch" data-id="@item.Id"><i class="fa fa-pencil" aria-hidden="true" title="Chỉnh sửa"></i></a>
+                <a href="javascript:void(0);" class="btn-delete-branch" data-id="@item.Id"><i class="fa fa-trash-o" aria-hidden="true" title="Xóa"></i></a>
+       
             </td>
         </tr>
 }
 
     </table>
 </div>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="height:30px;">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".btn-edit-branch").click(function () {
+            var $buttonClicked = $(this);
+            var url = '/Branch/EditBranchPartial';
+            var id = $buttonClicked.attr('data-id');
+            ProdcessEdit(url, id);
+        });
+        function ProdcessEdit(url, id) {
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function (data) {
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Lỗi load dữ liệu.");
+                }
+            });
+        }
+
+        $("#btnClose").click(function () {
+            $('#myModal').modal('hide');
+        });
+        $(".btn-delete-branch").click(function () {
+            var $buttonClicked = $(this);
+            var url = '/Branch/DeleteBranch';
+            var id = $buttonClicked.attr('data-id');
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function () {
+                    window.location.reload();
+                    alert("Xóa dữ liệu thành công");
+                },
+                error: function () {
+                    alert("Lỗi xóa dữ liệu.");
+                }
+            });
+        });
+
+    });
+
+</script>

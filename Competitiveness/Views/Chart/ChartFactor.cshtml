@@ -17,6 +17,12 @@
         .chart svg:not(:root) {
             overflow: visible;
         }
+
+    line.line {
+        stroke: rgb(123, 11, 11) !important;
+        stroke-opacity: 0.55 !important;
+        stroke-width: 1.3px !important;
+    }
 </style>
 
 
@@ -42,25 +48,25 @@
 <script type="text/javascript">
 
     $("select").change(function () {
-      $("select option:selected").each(function () {
-          // var ids = $(this).val().toString();
-          var id = $(this).val();
-          $.ajax({
-              @*url: '@Url.Action("GetDataJson", "Chart", new {id = 1 })',*@
-              url: '/Chart/GetDataFactorJson?id=' + id,
-              type: "GET",
-              dataType: 'text',
-              success: function (response) {
-                  var d = JSON.parse(response);
-                   chart(d);
-              },
-              error: function () {
-                  alert("error occured");
-              }
-          });
-      });
-      //
-  })
+        $("select option:selected").each(function () {
+            // var ids = $(this).val().toString();
+            var id = $(this).val();
+            $.ajax({
+                @*url: '@Url.Action("GetDataJson", "Chart", new {id = 1 })',*@
+                url: '/Chart/GetDataFactorJson?id=' + id,
+                type: "GET",
+                dataType: 'text',
+                success: function (response) {
+                    var d = JSON.parse(response);
+                    chart(d);
+                },
+                error: function () {
+                    alert("error occured");
+                }
+            });
+        });
+        //
+    })
   .change
 
     function chart(d) {
@@ -94,7 +100,7 @@
             .attr('transform', 'translate(90,0)')
             .attr("x", w - 70)
             .attr("y", 10)
-            .attr("font-size", "12px")
+            .attr("font-size", "14px")
             .attr("fill", "#404040")
             .text("Biểu đồ 4.1 Trọng lượng của tầm quan trọng(màu đỏ) và trọng lượng có nghĩa của các yếu tố (màu xanh) ở cấp độ đầu tiên.");
 
@@ -121,7 +127,7 @@
           .append("text")
           .attr("x", w - 52)
           .attr("y", function (d, i) { return i * 20 + 9; })
-          .attr("font-size", "11px")
+          .attr("font-size", "14px")
           .attr("fill", "#737373")
           .text(function (d) { return d; })
         ;
@@ -129,4 +135,3 @@
 
 
 </script>
-
