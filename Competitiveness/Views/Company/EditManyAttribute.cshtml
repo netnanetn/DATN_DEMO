@@ -1,0 +1,205 @@
+﻿
+@model Competitiveness.Models.AllModelCompany
+@{
+    ViewBag.Title = "EditManyAttribute";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #btnSave {
+        margin-left: 985px;
+        position: absolute;
+        margin-top: -25px;
+        z-index: 99;
+    }
+
+    #btnReturn {
+        margin-left: 900px;
+        position: absolute;
+        margin-top: -25px;
+        z-index: 99;
+    }
+
+    .treetable-expanded > td:first-child,
+    .treetable-collapsed > td:first-child {
+        padding-left: 2em;
+    }
+
+        .treetable-expanded > td:first-child > .treetable-expander,
+        .treetable-collapsed > td:first-child > .treetable-expander {
+            top: 0.05em;
+            position: relative;
+            margin-left: -1.5em;
+            margin-right: 0.25em;
+        }
+
+    .treetable-expanded .treetable-expander,
+    .treetable-expanded .treetable-expander {
+        width: 1em;
+        height: 1em;
+        cursor: pointer;
+        position: relative;
+        display: inline-block;
+    }
+
+    .treetable-depth-1 > td:first-child {
+        padding-left: 3em;
+    }
+
+    .treetable-depth-2 > td:first-child {
+        padding-left: 4.5em;
+    }
+
+    .treetable-depth-3 > td:first-child {
+        padding-left: 6em;
+    }
+
+    input {
+        width: 100%;
+        border: 6px;
+        border-color: rebeccapurple;
+        border-radius: 2px;
+        padding: 5px;
+        background: yellowgreen;
+    }
+
+        input[type=text]:focus {
+            width: 100%;
+            border: 6px;
+            border-color: rebeccapurple;
+            border-radius: 2px;
+            padding: 5px;
+            background: #ce5c5c;
+        }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title"><b>Chỉ số năng lực cạnh tranh</b></h4>
+            <button class="btn btn-default" id="btnReturn">
+                @Html.ActionLink("Quay lại", "DetailsOfCompany", new { companyId = Model.factor[0].CompanyId })
+            </button>
+            <button class="btn btn-success" id="btnSave" type="submit">
+                Lưu
+            </button>
+        </div>
+        <div class="panel-body" style="background-color: rgb(69, 87, 93)">
+
+            <table id="table-basic" class="table tree table-inverse" role="grid" aria-describedby="table-basic_info">
+                <thead>
+                    <tr role="row" style="background: blue">
+                        <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Yếu tố cạnh tranh</th>
+                        <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Tiêu chí cạnh tranh</th>
+                        <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 437px;">Thuộc tính cạnh tranh</th>
+                        <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 100px;">Điểm số</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    @*@foreach (var item in Model.factor)
+                        {*@
+                    @for (int h = 0; h < Model.factor.Count; h++)
+                {
+                        <tr data-node="treetable-@Model.factor[h].FactorId" data-pnode="">
+                            <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                            <td class="hidden">
+                                @Html.HiddenFor(modelItem => Model.factor[h].Id)
+                            </td>
+                            <td class="hidden">
+                                @Html.HiddenFor(modelItem => Model.factor[h].CompanyId)
+                            </td>
+                            <td class="hidden">
+                                @Html.HiddenFor(modelItem => Model.factor[h].FactorId)
+                            </td>
+                            <td style="">
+                                <span class="treetable-expander fa fa-angle-down"></span>
+                                @Html.EditorFor(modelItem => Model.factor[h].FactorName)
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                @Html.EditorFor(modelItem => Model.factor[h].Weight)
+                            </td>
+
+
+                        </tr>
+
+                        //foreach (var citem in Model.criteria)
+                        //{
+                        for (int j = 0; j < Model.criteria.Count; j++)
+                        {
+                            if (Model.criteria[j].FactorId == Model.factor[h].FactorId)
+                            {
+                                <tr data-node="treetable-01" data-pnode="treetable-@Model.criteria[j].FactorId">
+                                    <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                                    <td class="hidden">
+                                        @Html.HiddenFor(modelItem => Model.criteria[j].Id)
+                                    </td>
+                                    <td class="hidden">
+                                        @Html.HiddenFor(modelItem => Model.criteria[j].CompanyId)
+                                    </td>
+                                    <td class="hidden">
+                                        @Html.HiddenFor(modelItem => Model.criteria[j].CriteriaId)
+                                    </td>
+                                    <td></td>
+                                    <td style="">
+
+                                        @Html.EditorFor(modelItem => Model.criteria[j].CriteriaName)
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        @Html.EditorFor(modelItem => Model.criteria[j].Weight)
+                                    </td>
+
+
+                                </tr>
+                                for (int i = 0; i < Model.attribute.Count; i++)
+                                {
+                                    if (Model.attribute[i].CriteriaId == Model.criteria[j].CriteriaId)
+                                    {
+
+                                        <tr data-node="treetable-@Model.criteria[j].CriteriaId" data-pnode="treetable-@Model.attribute[i].FactorId">
+                                            <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                                            <td class="hidden">
+                                                @Html.HiddenFor(modelItem => Model.attribute[i].Id)
+                                            </td>
+                                            <td class="hidden">
+                                                @Html.HiddenFor(modelItem => Model.attribute[i].CompanyId)
+                                            </td>
+                                            <td class="hidden">
+                                                @Html.HiddenFor(modelItem => Model.attribute[i].AttributeId)
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="">
+                                                @Html.EditorFor(modelItem => Model.attribute[i].AttributeName)
+                                            </td>
+                                            <td>
+                                                @Html.EditorFor(modelItem => Model.attribute[i].Weight)
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+}
+<script>
+    $(document).ready(function () {
+
+        $('.table').treeTable();
+
+    });
+
+</script>

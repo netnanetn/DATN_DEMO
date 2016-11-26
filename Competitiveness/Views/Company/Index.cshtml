@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Competitiveness.Company>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+    <button class="btn btn-default btn-create" style="float:right; margin: 5px;">
+       Tạo mới
+    </button>
+    <table class="table table-striped dataTable">
+        <tr>
+          
+            <th>
+                Doanh nghiệp được khảo sát
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Name, "DetailsOfCompany", new { companyId = (int)item.CompanyId })
+                </td>
+                <td>
+                    <a href="javascript:void(0);" class="btn-edit-company" data-id="@item.CompanyId"><i class="fa fa-pencil" aria-hidden="true" title="Chỉnh sửa"></i></a>
+                    <a href="javascript:void(0);" class="btn-delete-company" data-id="@item.CompanyId"><i class="fa fa-trash-o" aria-hidden="true" title="Xóa"></i></a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="height:30px;">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $(".btn-edit-company").click(function () {
+            var $buttonClicked = $(this);
+            var url = '/Company/EditCompanyPartial';
+            var id = $buttonClicked.attr('data-id');
+            ProdcessEdit(url, id);
+        });
+        function ProdcessEdit(url, id) {
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "companyId": id },
+                datatype: "json",
+                success: function (data) {
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Lỗi load dữ liệu.");
+                }
+            });
+        }
+
+       
+
+        $(".btn-delete-company").click(function () {
+            var $buttonClicked = $(this);
+            var url = '/Company/DeleteCompany';
+            var id = $buttonClicked.attr('data-id');
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "companyId": id },
+                datatype: "json",
+                success: function () {
+                    window.location.reload();
+                    alert("Xóa dữ liệu thành công");
+                },
+                error: function () {
+                    alert("Lỗi xóa dữ liệu.");
+                }
+            });
+        });
+
+        $(".btn-create").click(function () {
+            var url = '/Company/PartialViewCreate';
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data:"",
+                datatype: "json",
+                success: function (data) {
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Lỗi tạo ngành cần khảo sát.");
+                }
+            });
+
+        });
+
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnClose").click(function () {
+            $('#myModal').modal('hide');
+           
+        });
+
+    });
+
+</script>

@@ -1,0 +1,52 @@
+﻿@model Competitiveness.Models.CreateNewCompanyModel
+<style type="text/css">
+    .dropdown-submenu {
+        position: relative;
+    }
+
+        .dropdown-submenu .dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -1px;
+        }
+</style>
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Tạo mới công ty cần khảo sát</h4>
+            </div>
+            <div class="panel-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label" for="">Lựa chọn ngành tương ứng</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(model => model.BranchId, Model.branchItem)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="">Tên công ty</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Lưu</button>
+                    <button class="btn btn-default" style="float:right" id="btnClose">
+                        Hủy
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+
+</div>

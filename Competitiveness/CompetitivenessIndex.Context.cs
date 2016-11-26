@@ -26,8 +26,12 @@ namespace Competitiveness
         }
     
         public virtual DbSet<Attribute> Attributes { get; set; }
+        public virtual DbSet<AttributesOfCompany> AttributesOfCompanies { get; set; }
         public virtual DbSet<Branch> Branchs { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<Criteria> Criterias { get; set; }
+        public virtual DbSet<CriteriasOfCompany> CriteriasOfCompanies { get; set; }
         public virtual DbSet<Factor> Factors { get; set; }
+        public virtual DbSet<FactorsOfCompany> FactorsOfCompanies { get; set; }
     }
 }

@@ -1,0 +1,228 @@
+﻿@model Competitiveness.Models.AllModelCompany
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .btn-return {
+        margin-left: 917px;
+        position: absolute;
+        margin-top: -25px;
+        z-index: 99;
+    }
+
+    .edit-multil-row {
+        margin-left: 709px;
+        position: absolute;
+        margin-top: -25px;
+        z-index: 99;
+    }
+
+    .sync-data {
+        margin-left: 610px;
+        position: absolute;
+        margin-top: -25px;
+        z-index: 99;
+    }
+
+    .treetable-expanded > td:first-child,
+    .treetable-collapsed > td:first-child {
+        padding-left: 2em;
+    }
+
+        .treetable-expanded > td:first-child > .treetable-expander,
+        .treetable-collapsed > td:first-child > .treetable-expander {
+            top: 0.05em;
+            position: relative;
+            margin-left: -1.5em;
+            margin-right: 0.25em;
+        }
+
+    .treetable-expanded .treetable-expander,
+    .treetable-expanded .treetable-expander {
+        width: 1em;
+        height: 1em;
+        cursor: pointer;
+        position: relative;
+        display: inline-block;
+    }
+
+    .treetable-depth-1 > td:first-child {
+        padding-left: 3em;
+    }
+
+    .treetable-depth-2 > td:first-child {
+        padding-left: 4.5em;
+    }
+
+    .treetable-depth-3 > td:first-child {
+        padding-left: 6em;
+    }
+</style>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><b>Trọng số các yếu tố cạnh tranh</b></h4>
+        <button class="btn btn-default sync-data" id="syncData" data-id="@Model.factor[0].CompanyId">
+                <i class="fa fa-refresh"> Đồng bộ</i>
+            </button>
+            <button class="btn btn-default edit-multil-row">
+                @Html.ActionLink("Chỉnh sửa nhiều thuộc tính", "EditManyAttribute", new { companyId = Model.factor[0].CompanyId })
+            </button>
+            <button class="btn btn-default btn-return">
+                @Html.ActionLink("Quay lại", "Index")
+            </button>
+    </div>
+    <div class="panel-body" style="background-color: #f5f5f5">
+
+        <table id="table-basic" class="table tree table-inverse" role="grid" aria-describedby="table-basic_info">
+            <thead>
+                <tr role="row" style="background: blue">
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Yếu tố cạnh tranh</th>
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Tiêu chí cạnh tranh</th>
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 337px;">Thuộc tính cạnh tranh</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 100px;">Điểm số</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">Trọng lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model.factor)
+            {
+                    <tr data-node="treetable-@item.FactorId" data-pnode="">
+                        <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                        <td class="hidden">
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td class="hidden">
+                            @Html.DisplayFor(modelItem => item.CompanyId)
+                        </td>
+                        <td class="hidden">
+                            @Html.DisplayFor(modelItem => item.FactorId)
+                        </td>
+                        <td style="background: rgb(7, 189, 113);">
+                            @*@Html.DisplayFor(modelItem => item.FactorName)*@
+                            <span class="treetable-expander fa fa-angle-down"></span>
+                            @Html.ActionLink(item.FactorName, "EditFactor", new { branchId = item.CompanyId, factorId = item.FactorId })
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Score)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+
+                    </tr>
+
+                    foreach (var citem in Model.criteria)
+                    {
+                        if (citem.FactorId == item.FactorId)
+                        {
+                            <tr data-node="treetable-01" data-pnode="treetable-@citem.FactorId">
+                                <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                                <td class="hidden">
+                                    @Html.DisplayFor(modelItem => citem.Id)
+                                </td>
+                                <td class="hidden">
+                                    @Html.DisplayFor(modelItem => citem.CompanyId)
+                                </td>
+                                <td class="hidden">
+                                    @Html.DisplayFor(modelItem => citem.CriteriaId)
+                                </td>
+                                <td></td>
+                                <td style="background:#35d2a0">
+
+                                    @*@Html.DisplayFor(modelItem => citem.CriteriaName)*@
+                                    @*<span class="treetable-expander fa fa-angle-down"></span>*@
+                                    @Html.ActionLink(citem.CriteriaName, "EditCriteria", new { branchId = citem.CompanyId, factorId = citem.FactorId, criteriaId = citem.CriteriaId })
+                                </td>
+                                <td></td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => citem.Score)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => citem.Weight)
+                                </td>
+
+                            </tr>
+                            foreach (var aitem in Model.attribute)
+                            {
+                                if (aitem.CriteriaId == citem.CriteriaId)
+                                {
+
+                                    <tr data-node="treetable-@citem.CriteriaId" data-pnode="treetable-@aitem.FactorId">
+                                        <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                                        <td class="hidden">
+                                            @Html.DisplayFor(modelItem => aitem.Id)
+                                        </td>
+                                        <td class="hidden">
+                                            @Html.DisplayFor(modelItem => aitem.CompanyId)
+                                        </td>
+                                        <td class="hidden">
+                                            @Html.DisplayFor(modelItem => aitem.AttributeId)
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="background: rgba(167, 224, 25, 0.64)">
+                                            @Html.DisplayFor(modelItem => aitem.AttributeName)
+                                            @*  @Html.ActionLink(aitem.AttributeName, "EditAttribute", new { branchId = aitem.BranchId, factorId = aitem.FactorId, criteriaId = aitem.CriteriaId, attributeId = aitem.AttributeId })*@
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => aitem.Score)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => aitem.Weight)
+                                        </td>
+
+                                    </tr>
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content" style="height:30px;">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('.table').treeTable();
+        $("#syncData").click(function () {
+            var id = $(this).attr('data-id');
+            var url = '/Company/SyncDataFromSurvey';
+            $.ajax({
+                type: "GET",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                data: { "companyId": id },
+                datatype: "json",
+                success: function () {
+                    window.location.reload();
+                    alert("Đồng bộ thành công");
+                },
+                error: function () {
+                    alert("Lỗi đồng bộ dữ liệu.");
+                }
+            });
+        });
+
+    });
+
+</script>  

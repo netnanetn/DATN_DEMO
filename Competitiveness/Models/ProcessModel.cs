@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using System.Web.Mvc;
+
 namespace Competitiveness.Models
 {
     public class BranchModel
@@ -68,7 +70,8 @@ namespace Competitiveness.Models
         }
     }
 
-    public class CompetitivenessJson{
+    public class CompetitivenessJson
+    {
         [JsonProperty("axis")]
         public string Axis { get; set; }
         [JsonProperty("value")]
@@ -93,5 +96,70 @@ namespace Competitiveness.Models
 
         }
     }
-   
+    public class AttributesOfCompanyModel
+    {
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public int FactorId { get; set; }
+        public int CriteriaId { get; set; }
+        public int AttributeId { get; set; }
+        public string AttributeName { get; set; }
+        public Nullable<double> Score { get; set; }
+        public Nullable<double> Weight { get; set; }
+    }
+    public class CriteriasOfCompanyModel
+    {
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public int FactorId { get; set; }
+        public int CriteriaId { get; set; }
+        public string CriteriaName { get; set; }
+        public Nullable<double> Score { get; set; }
+        public Nullable<double> Weight { get; set; }
+    }
+    public class FactorsOfCompanyModel
+    {
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public int FactorId { get; set; }
+        public string FactorName { get; set; }
+        public Nullable<double> Score { get; set; }
+        public Nullable<double> Weight { get; set; }
+    }
+    public class CompanyModel
+    {
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public string Name { get; set; }
+        public int BranchId { get; set; }
+    }
+    public class CreateNewCompanyModel
+    {
+        //  public List<Branch> Branchs { get; set; }
+        public List<SelectListItem> branchItem { get; set; }
+        //   public CompanyModel CompanyModel { get; set; }
+        public int Id { get; set; }
+        public int CompanyId { get; set; }
+        public string Name { get; set; }
+        public int BranchId { get; set; }
+        public CreateNewCompanyModel()
+        {
+            // branchItem = new IEnumerable<SelectListItem>();
+            //   CompanyModel = new CompanyModel();
+            branchItem = new List<SelectListItem>();
+        }
+    }
+    public class AllModelCompany
+    {
+        public List<FactorsOfCompany> factor { get; set; }
+        public List<CriteriasOfCompany> criteria { get; set; }
+        public List<AttributesOfCompany> attribute { get; set; }
+        public AllModelCompany()
+        {
+            factor = new List<FactorsOfCompany>();
+            criteria = new List<CriteriasOfCompany>();
+            attribute = new List<AttributesOfCompany>();
+
+        }
+    }
 }

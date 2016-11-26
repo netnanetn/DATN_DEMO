@@ -198,25 +198,31 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Attribute.cs">
-      <DependentUpon>Competitiveness.tt</DependentUpon>
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttributesOfCompany.cs">
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
     <Compile Include="Branch.cs">
-      <DependentUpon>Competitiveness.tt</DependentUpon>
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
-    <Compile Include="Competitiveness.Context.cs">
+    <Compile Include="Company.cs">
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CompetitivenessIndex.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Competitiveness.Context.tt</DependentUpon>
+      <DependentUpon>CompetitivenessIndex.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Competitiveness.cs">
+    <Compile Include="CompetitivenessIndex.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Competitiveness.tt</DependentUpon>
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
-    <Compile Include="Competitiveness.Designer.cs">
+    <Compile Include="CompetitivenessIndex.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Competitiveness.edmx</DependentUpon>
+      <DependentUpon>CompetitivenessIndex.edmx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BranchController.cs" />
@@ -225,10 +231,16 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Criteria.cs">
-      <DependentUpon>Competitiveness.tt</DependentUpon>
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CriteriasOfCompany.cs">
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
     <Compile Include="Factor.cs">
-      <DependentUpon>Competitiveness.tt</DependentUpon>
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FactorsOfCompany.cs">
+      <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -241,15 +253,15 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Competitiveness.Context.tt">
+    <Content Include="CompetitivenessIndex.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Competitiveness.edmx</DependentUpon>
-      <LastGenOutput>Competitiveness.Context.cs</LastGenOutput>
+      <DependentUpon>CompetitivenessIndex.edmx</DependentUpon>
+      <LastGenOutput>CompetitivenessIndex.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Competitiveness.tt">
+    <Content Include="CompetitivenessIndex.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Competitiveness.edmx</DependentUpon>
-      <LastGenOutput>Competitiveness.cs</LastGenOutput>
+      <DependentUpon>CompetitivenessIndex.edmx</DependentUpon>
+      <LastGenOutput>CompetitivenessIndex.cs</LastGenOutput>
     </Content>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -265,12 +277,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Competitiveness.edmx">
+    <EntityDeploy Include="CompetitivenessIndex.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Competitiveness.Designer.cs</LastGenOutput>
+      <LastGenOutput>CompetitivenessIndex.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Competitiveness.edmx.diagram">
-      <DependentUpon>Competitiveness.edmx</DependentUpon>
+    <Content Include="CompetitivenessIndex.edmx.diagram">
+      <DependentUpon>CompetitivenessIndex.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\D3Chart\d3.v3.js" />
@@ -541,10 +553,15 @@
     <Content Include="Views\Branch\EditAttributePartial.cshtml" />
     <Content Include="Views\Branch\EditManyAttribute.cshtml" />
     <Content Include="Views\Branch\EditBranchPartial.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Company\Create.cshtml" />
+    <Content Include="Views\Company\PartialViewCreate.cshtml" />
+    <Content Include="Views\Company\DetailsOfCompany.cshtml" />
+    <Content Include="Views\Company\EditManyAttribute.cshtml" />
+    <Content Include="Views\Company\EditCompanyPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Company\" />
     <Folder Include="Views\Include\" />
   </ItemGroup>
   <ItemGroup>
