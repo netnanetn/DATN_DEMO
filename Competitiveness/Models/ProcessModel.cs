@@ -162,4 +162,12 @@ namespace Competitiveness.Models
 
         }
     }
+    public class ListCriteriasOfCompany
+    {
+        public List<FactorsOfCompany> factors { get; set; }
+        public ListCriteriasOfCompany()
+        {
+            factors = new List<FactorsOfCompany>();
+        }
+    }
 }

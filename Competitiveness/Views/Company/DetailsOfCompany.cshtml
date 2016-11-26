@@ -206,7 +206,7 @@
         $('.table').treeTable();
         $("#syncData").click(function () {
             var id = $(this).attr('data-id');
-            var url = '/Company/SyncDataFromSurvey';
+            var url = '/Company/SyncData';
             $.ajax({
                 type: "GET",
                 url: url,

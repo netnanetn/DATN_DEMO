@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Competitiveness.Company>
+
+@{
+    ViewBag.Title = "CompareChart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">
+    <table class="table table-striped dataTable">
+        <tr>
+
+            <th>
+                Lựa chọn doanh nghiệp được khảo sát để xem biểu đồ so sánh
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td hidden>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.ActionLink(item.Name, "CompareChartCompany", new { companyId = (int)item.CompanyId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

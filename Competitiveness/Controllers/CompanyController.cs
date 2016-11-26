@@ -1,9 +1,11 @@
 ﻿using Competitiveness.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace Competitiveness.Controllers
 {
@@ -69,7 +71,7 @@ namespace Competitiveness.Controllers
                         FactorId = factor.FactorId,
                         FactorName = factor.FactorName,
                         Score = factor.Score,
-                        Weight = factor.Weight
+                        Weight = factor.Weight*0.95
                     };
                     db.FactorsOfCompanies.Add(factorOfCompany);
                 }
@@ -83,7 +85,7 @@ namespace Competitiveness.Controllers
                         CriteriaId = criteria.CriteriaId,
                         CriteriaName = criteria.CriteriaName,
                         Score = criteria.Score,
-                        Weight = criteria.Weight
+                        Weight = criteria.Weight * 0.95
                     };
                     db.CriteriasOfCompanies.Add(criteriaOfCompany);
                 }
@@ -98,7 +100,7 @@ namespace Competitiveness.Controllers
                         AttributeId = attribute.AttributeId,
                         AttributeName = attribute.AttributeName,
                         Score = attribute.Score,
-                        Weight = attribute.Weight
+                        Weight = attribute.Weight * 0.95
                     };
                     db.AttributesOfCompanies.Add(attributesOfCompany);
                 }
@@ -178,7 +180,7 @@ namespace Competitiveness.Controllers
             }
         }
         [HttpGet]
-        public ActionResult SyncDataFromSurvey(int companyId = 0)
+        public ActionResult SyncData(int companyId = 0)
         {
 
             var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == companyId);
@@ -187,7 +189,6 @@ namespace Competitiveness.Controllers
             foreach (var factor in factors)
             {
                 var weightOfFactor = (double)(factor.Weight / totalWeightFactor);//trọng lượng của từng yếu tố theo %
-
                 var criterias = db.CriteriasOfCompanies.Where(x => x.CompanyId == companyId && x.FactorId == factor.FactorId);
                 var totalWeightCriteria = criterias.Sum(x => x.Weight);
 
@@ -220,6 +221,13 @@ namespace Competitiveness.Controllers
             try
             {
                 Company cp = db.Companies.Where(x=>x.CompanyId == companyId).SingleOrDefault();
+                var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == cp.CompanyId);
+                var criterias = db.CriteriasOfCompanies.Where(x => x.CompanyId == cp.CompanyId);
+                var attributes = db.AttributesOfCompanies.Where(x => x.CompanyId == cp.CompanyId);
+                // đoạn này mở sau khi làm phần xác nhận đã
+                db.AttributesOfCompanies.RemoveRange(attributes);
+                db.CriteriasOfCompanies.RemoveRange(criterias);
+                db.FactorsOfCompanies.RemoveRange(factors);
                 db.Companies.Remove(cp);
                 db.SaveChanges();
 
@@ -252,6 +260,64 @@ namespace Competitiveness.Controllers
             {
                 return PartialView("EditBranchPartial", company);
             }
+        }
+        
+        [HttpGet]
+        public ActionResult CompareChart()
+        {
+            var companies = db.Companies.ToList();
+            return View(companies);
+        }
+        [HttpGet]
+        public ActionResult CompareChartCompany(int companyId)
+        {
+            ListCriteriasOfCompany listModel = new ListCriteriasOfCompany();
+            var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == companyId);
+            listModel.factors.AddRange(factors);
+            return View(listModel);
+        }
+        [HttpGet]
+        public string GetDataOfCriteriaCompareJson(int companyId, int factorId)
+        {
+            CompetitivenessJsons jsonObject = new CompetitivenessJsons();
+            var company = db.Companies.Where(x => x.CompanyId == companyId).SingleOrDefault();
+            var criteriaNormals = db.Criterias.Where(x=>x.FactorId == factorId && x.BranchId == company.BranchId);
+
+            foreach(var criteriaNomal in criteriaNormals)
+            {
+                var JsonScoreNormal = new CompetitivenessJson
+                {
+                    Axis = criteriaNomal.CriteriaName,
+                    Value = (Double)criteriaNomal.Score
+                };
+                jsonObject.MeanWeight.Add(JsonScoreNormal);
+            }
+
+            var criteriaCompanys = db.CriteriasOfCompanies.Where(x=>x.CompanyId == companyId && x.FactorId == factorId);
+             foreach(var criteriaCompany in criteriaCompanys)
+            {
+                var JsonScoreCompany = new CompetitivenessJson
+                {
+                    Axis = criteriaCompany.CriteriaName,
+                    Value = (Double)criteriaCompany.Score
+                };
+                jsonObject.ImportantWeight.Add(JsonScoreCompany);
+            }
+
+            string json = new JavaScriptSerializer().Serialize(jsonObject);
+
+            JObject jo = new JObject();
+
+            // Parse json *OBJECT*
+            jo = JObject.Parse(json);
+            JToken tokenImportantWeight = jo["ImportantWeight"];
+            JToken tokenMeanWeight = jo["MeanWeight"];
+            var ImportantWeightString = tokenImportantWeight.ToString();
+            var MeanWeightString = tokenMeanWeight.ToString();
+            var result = ("[" + ImportantWeightString + "," + MeanWeightString + "]").Replace("Axis", "axis").Replace("Value", "value").Replace("\n", "").Replace("\r", "").Replace('\"', '"');
+            ChartModel modelChart = new ChartModel();
+            modelChart.modelChart = result;
+            return result;
         }
         // GET: Company/Details/5
         public ActionResult Details(int id)
