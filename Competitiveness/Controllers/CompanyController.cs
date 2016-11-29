@@ -43,6 +43,7 @@ namespace Competitiveness.Controllers
         {
             try
             {
+                Random randNum = new Random();
                 if (String.IsNullOrEmpty(newCompany.Name))
                 {
                     return RedirectToAction("Index");
@@ -71,7 +72,7 @@ namespace Competitiveness.Controllers
                         FactorId = factor.FactorId,
                         FactorName = factor.FactorName,
                         Score = factor.Score,
-                        Weight = factor.Weight*0.95
+                        Weight = factor.Weight * (0.9 + randNum.NextDouble() * 0.2)
                     };
                     db.FactorsOfCompanies.Add(factorOfCompany);
                 }
@@ -85,7 +86,7 @@ namespace Competitiveness.Controllers
                         CriteriaId = criteria.CriteriaId,
                         CriteriaName = criteria.CriteriaName,
                         Score = criteria.Score,
-                        Weight = criteria.Weight * 0.95
+                        Weight = criteria.Weight * (0.9+ randNum.NextDouble()*0.2)
                     };
                     db.CriteriasOfCompanies.Add(criteriaOfCompany);
                 }
@@ -100,7 +101,7 @@ namespace Competitiveness.Controllers
                         AttributeId = attribute.AttributeId,
                         AttributeName = attribute.AttributeName,
                         Score = attribute.Score,
-                        Weight = attribute.Weight * 0.95
+                        Weight = attribute.Weight * (0.9 + randNum.NextDouble() * 0.2)
                     };
                     db.AttributesOfCompanies.Add(attributesOfCompany);
                 }

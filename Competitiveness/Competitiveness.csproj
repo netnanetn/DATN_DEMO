@@ -267,7 +267,16 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\demo.css" />
     <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\Images\bannercanhtranh.PNG" />
+    <Content Include="Content\Images\cacbuocthuchien.PNG" />
+    <Content Include="Content\Images\canhtranh.jpg" />
     <Content Include="Content\Images\competitiveness.jpg" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\khungdanhgia.PNG" />
+    <Content Include="Content\Images\mavt.PNG" />
+    <Content Include="Content\Images\nangluccanhtranh.jpg" />
+    <Content Include="Content\Images\ppnc.PNG" />
+    <Content Include="Content\Images\trongluongtb.PNG" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -561,6 +570,9 @@
     <Content Include="Views\Company\EditCompanyPartial.cshtml" />
     <Content Include="Views\Company\CompareChart.cshtml" />
     <Content Include="Views\Company\CompareChartCompany.cshtml" />
+    <Content Include="Views\Home\TheoryCompetitiveness.cshtml" />
+    <Content Include="Views\Home\EvaluationMethods.cshtml" />
+    <Content Include="Views\Home\MethodCompetitiveness.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

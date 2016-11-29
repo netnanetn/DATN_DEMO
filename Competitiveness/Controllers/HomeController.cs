@@ -16,7 +16,8 @@ namespace Competitiveness.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var companies = db.Companies;
+            return View(companies);
         }
         public ActionResult BuildingIndex()
         {
@@ -33,24 +34,19 @@ namespace Competitiveness.Controllers
                            where branch.BranchId == id
                            select branch.BranchId).FirstOrDefault();
 
-            var factors = from factor in db.Factors
-                          where factor.BranchId.Equals(id)
-                          select factor;
+            var factors = db.Factors.Where(x => x.BranchId == id).OrderByDescending(x=>x.Weight);
+          
             foreach(var fa in factors)
             {
                 model.factor.Add(fa);
             }
 
-            var criterias = from criteria in db.Criterias
-                            where criteria.BranchId.Equals(id)
-                            select criteria;
+            var criterias = db.Criterias.Where(x => x.BranchId == id).OrderByDescending(x => x.Weight);
             foreach(var criteria in criterias)
             {
                 model.criteria.Add(criteria);
             }
-            var attributes = from attribute in db.Attributes
-                            where attribute.BranchId.Equals(id)
-                            select attribute;
+            var attributes = db.Attributes.Where(x => x.BranchId == id).OrderByDescending(x => x.Weight);
             foreach (var attribute in attributes)
             {
                 model.attribute.Add(attribute);
@@ -175,6 +171,19 @@ namespace Competitiveness.Controllers
             return result;
         }
 
+        public ActionResult TheoryCompetitiveness()
+        {
+            return View();
+        }
+        public ActionResult EvaluationMethods()
+        {
+            return View();
+        }
+        public ActionResult MethodCompetitiveness()
+        {
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -188,5 +197,6 @@ namespace Competitiveness.Controllers
 
             return View();
         }
+
     }
 }

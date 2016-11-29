@@ -1,5 +1,147 @@
 ﻿@model Competitiveness.Models.AllModel
 
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><b>Trọng số các yếu tố cạnh tranh</b></h4>
+    </div>
+    <div class="panel-body">
+        <table id="table-basic" class="table table-striped dataTable" role="grid" aria-describedby="table-basic_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Yếu tố cạnh tranh</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 237px;">Điểm số</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 223px;">Trọng lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model.factor)
+            {
+                <tr>
+                    <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.BranchId)
+                    </td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.FactorId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FactorName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><b>Trọng số các tiêu chí cạnh tranh</b></h4>
+    </div>
+    <div class="panel-body">
+        <table id="table-basic" class="table table-striped dataTable" role="grid" aria-describedby="table-basic_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Yếu tố cạnh tranh</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 237px;">Điểm số</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 223px;">Trọng lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model.criteria)
+            {
+                if (item.FactorId == 1) { }
+                <tr>
+                    <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.BranchId)
+                    </td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.CriteriaId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CriteriaName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title"><b>Trọng số các thuộc tính cạnh tranh</b></h4>
+    </div>
+    <div class="panel-body">
+        <table id="table-basic" class="table table-striped dataTable" role="grid" aria-describedby="table-basic_info">
+            <thead>
+                <tr role="row">
+                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Thuộc tính cạnh tranh</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 237px;">Điểm số</th>
+                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 223px;">Trọng lượng</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var item in Model.attribute)
+            {
+                if (item.FactorId == 1) { }
+                <tr>
+                    <td id="itemId" class="itemIdClass tblColumn" hidden></td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.BranchId)
+                    </td>
+                    <td class="hidden">
+                        @Html.DisplayFor(modelItem => item.AttributeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AttributeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -113,102 +255,6 @@
 
                 }
 
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title"><b>Trọng số các tiêu chí cạnh tranh</b></h4>
-    </div>
-    <div class="panel-body">
-        <table id="table-basic" class="table table-striped dataTable" role="grid" aria-describedby="table-basic_info">
-            <thead>
-                <tr role="row">
-                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Yếu tố cạnh tranh</th>
-                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 237px;">Điểm số</th>
-                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 223px;">Trọng lượng</th>
-                </tr>
-            </thead>
-            <tbody>
-
-
-                @foreach (var item in Model.criteria)
-            {
-                if (item.FactorId == 1) { }
-                <tr>
-                    <td id="itemId" class="itemIdClass tblColumn" hidden></td>
-                    <td class="hidden">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td class="hidden">
-                        @Html.DisplayFor(modelItem => item.BranchId)
-                    </td>
-                    <td class="hidden">
-                        @Html.DisplayFor(modelItem => item.CriteriaId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CriteriaName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Score)
-                    </td>
-                    <td>
-
-                        @Html.DisplayFor(modelItem => item.Weight)
-                    </td>
-
-                </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title"><b>Trọng số các thuộc tính cạnh tranh</b></h4>
-    </div>
-    <div class="panel-body">
-        <table id="table-basic" class="table table-striped dataTable" role="grid" aria-describedby="table-basic_info">
-            <thead>
-                <tr role="row">
-                    <th class="sorting_desc" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending" aria-sort="descending" style="width: 177px;">Thuộc tính cạnh tranh</th>
-                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 237px;">Điểm số</th>
-                    <th class="sorting" tabindex="0" aria-controls="table-basic" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 223px;">Trọng lượng</th>
-                </tr>
-            </thead>
-            <tbody>
-
-
-                @foreach (var item in Model.attribute)
-            {
-                if (item.FactorId == 1) { }
-                <tr>
-                    <td id="itemId" class="itemIdClass tblColumn" hidden></td>
-                    <td class="hidden">
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td class="hidden">
-                        @Html.DisplayFor(modelItem => item.BranchId)
-                    </td>
-                    <td class="hidden">
-                        @Html.DisplayFor(modelItem => item.AttributeId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AttributeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Score)
-                    </td>
-                    <td>
-
-                        @Html.DisplayFor(modelItem => item.Weight)
-                    </td>
-
-                </tr>
-                }
             </tbody>
         </table>
     </div>
