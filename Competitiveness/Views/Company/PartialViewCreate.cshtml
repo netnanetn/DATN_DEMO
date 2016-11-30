@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label class="control-label" for="">Lựa chọn ngành tương ứng</label>
                         <div class="controls">
-                            @Html.DropDownListFor(model => model.BranchId, Model.branchItem)
+                            @Html.DropDownListFor(model => model.BranchId, Model.branchItem, new { @class = "select-branch" })
                         </div>
                     </div>
                     <div class="form-group">

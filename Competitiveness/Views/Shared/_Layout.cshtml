@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/Veneto/dist/assets/plugins/jquery-jvectormap/jquery-jvectormap-1.2.2.css" />
     <link rel="stylesheet" href="~/Veneto/dist/css/plugins/rickshaw.min.css">
     <link rel="stylesheet" href="~/Veneto/dist/css/plugins/morris.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css" />
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -25,6 +26,7 @@
     @* d3 chart *@
     <script src="~/Scripts/D3Chart/RadarChart.js"></script>
     <script src="~/Scripts/D3Chart/d3.v3.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
     <style type="text/css">
         a:link { 
 text-decoration: none; 
@@ -145,7 +147,7 @@ text-decoration: none;
                         </a>
                     </li>
                     <li>
-                        <a href="EvaluationMethods">
+                        <a href="/Home/EvaluationMethods">
                             <i class="fa fa-fw fa-circle text-danger"></i>
                             Phương pháp đánh giá
                         </a>
@@ -159,37 +161,23 @@ text-decoration: none;
                     <li>
                         <a href="javascript:;">
                             <i class="fa fa-fw fa-circle text-info"></i>
-                            Kết quả nghiên cứu
+                            Kết quả đạt được
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-fw fa-circle text-info"></i>
+                            Hạn chế của nghiên cứu 
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-fw fa-circle text-info"></i>
+                            Hướng phát triển
                         </a>
                     </li>
                 </ul>
-                <h5 class="sidebar-header">Tổng kết</h5>
-                <ul class="sidebar-summary">
-                    <li>
-                        <div class="mini-chart mini-chart-block">
-                            <div class="chart-details">
-                                <div class="chart-name">Kết quả đạt được</div>
-                            </div>
-                            <div id="mini-chart-sidebar-1" class="chart pull-right"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mini-chart mini-chart-block">
-                            <div class="chart-details">
-                                <div class="chart-name">Hạn chế nghiên cứu</div>
-                            </div>
-                            <div id="mini-chart-sidebar-2" class="chart pull-right"></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="mini-chart mini-chart-block">
-                            <div class="chart-details">
-                                <div class="chart-name">Hướng phát triển</div>
-                            </div>
-                            <div id="mini-chart-sidebar-3" class="chart pull-right"></div>
-                        </div>
-                    </li>
-                </ul>
+               
             </nav>
         </aside>
         <div class="page-content">
@@ -225,7 +213,7 @@ text-decoration: none;
     @* d3 chart *@
     <script src="~/Scripts/D3Chart/RadarChart.js"></script>
     <script src="~/Scripts/D3Chart/d3.v3.js"></script>
-
+    <script src="~/Scripts/angular.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

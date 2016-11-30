@@ -5,28 +5,29 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="page-heading page-heading-md" style="background-color:#337ab7">
+<div class="page-heading page-heading-md">
 
 
     <div class="container-fluid-md">
         <div class="row">
-            <p class="">Lựa chọn ngành để xem chỉ số cạnh tranh</p>
-            <div class="col-md-12">
+            <div class="col-md-4">
+                <p class="">Lựa chọn ngành để xem chỉ số cạnh tranh</p>
+            </div>
+            <div class="col-md-8">
                 @* not me *@
-                <select name="sweets">
+                <select name="sweets" class="select-branch">
                     @foreach (var item in Model)
                     {
                         <option value="@item.BranchId">@item.BranchName</option>
                     }
-                    <option>Tạo mới dữ liệu</option>
                 </select>
             </div>
         </div>
     </div>
     <br />
 
-   <div id="table_factor"></div>
-   
+    <div id="table_factor"></div>
+
 
 </div>
 <script>
@@ -39,20 +40,20 @@
           $("select option:selected").each(function () {
 
 
-             // var ids = $(this).val().toString();
+              // var ids = $(this).val().toString();
               var idss = ($(this).val()).toString();
               $.ajax({
                   @*url: '@Url.Action("PartialViewFactor", "Home", new {id = idss })',*@
-                  url: '/Home/PartialViewFactor?id='+idss,
+                  url: '/Home/PartialViewFactor?id=' + idss,
                   type: "GET",
                   success: function (response) {
-                   $("#table_factor").html(response);
+                      $("#table_factor").html(response);
                   },
                   error: function () {
-                  alert("error occured");
-              }
+                      alert("error occured");
+                  }
 
-          });
+              });
 
 
           });

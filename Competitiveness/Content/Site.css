@@ -1,1 +1,19 @@
-﻿
+﻿.select-branch {
+    border: 2px;
+    border-radius: 2px;
+    padding: 5px;
+    background: rgba(230, 221, 221, 0.51);
+}
+
+.page-heading-md {
+    border-radius: 5px !important;
+}
+
+.page-content {
+    background-color: rgba(44, 84, 50, 0.4);
+    min-height: 1000px;
+}
+
+#accordion {
+    color: #000000;
+}

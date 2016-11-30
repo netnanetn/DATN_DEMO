@@ -3,16 +3,92 @@
     ViewBag.Title = "MethodCompetitiveness";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row">
-    <div class="col-md-12">
-        <div id="accordion" class="panel-group">
+<style>
+    table, th, td {
+        border: 1px solid grey;
+        border-collapse: collapse;
+        padding: 5px;
+    }
 
-            <p>Trước tiên chúng ta sẽ nghiên cứu MAVT (Multi attributes value theory) là một lý thuyết để tính giá trị nhiều thuộc tính: </p>
-            <img src="~/Content/Images/mavt.PNG" />
-            <p>
-                
-            </p>
+        table tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #ffffff;
+        }
+</style>
+<div class="page-heading page-heading-md">
+
+    <div class="container-fluid-md">
+        <p style="color:rgba(12, 4, 4, 0.81);">Trước tiên chúng ta sẽ nghiên cứu MAVT (Multi attributes value theory) là một lý thuyết để tính giá trị nhiều thuộc tính: </p>
+        <div class="row" style="background-color:#ffffff">
+            <div class="col-md-12">
+                <img src="~/Content/Images/mavt.PNG" />
+                <img src="~/Content/Images/methodtext.PNG" />
+            </div>
+        </div>
+        <div class="row">
+            <div ng-app="startApp">
+                <div ng-controller="MAVTController">
+                    <p>Nhập trọng số từ khảo sát để xem ví dụ về cách tính trọng số</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tiêu chí cạnh tranh</th>
+                                <th>Thuộc tính cạnh tranh</th>
+                                <th>Trọng số từ khảo sát</th>
+                                <th>trọng số tương đối</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tiêu chí A</td>
+                                <td>Thuộc tính A1</td>
+                                <td><input type="number" ng-model="number[0]" ng-change="total();functionCaculatorWeight()" /></td>
+                                <td><span>{{weight[0]}}</span></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Thuộc tính A2</td>
+                                <td><input type="number" ng-model="number[1]" ng-change="total();functionCaculatorWeight()" /></td>
+                                <td><span>{{weight[1]}}</span></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Thuộc tính A3</td>
+                                <td><input type="number" ng-model="number[2]" ng-change="total();functionCaculatorWeight()" /></td>
+                                <td><span>{{weight[2]}}</span></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>Thuộc tính A4</td>
+                                <td><input type="number" ng-model="number[3]" ng-change="total();functionCaculatorWeight()" /></td>
+                                <td><span>{{weight[3]}}</span></td>
+                            </tr>
+                            <tr>
+                                <td>Tổng</td>
+                                <td></td>
+                                <td><span>{{totalnum}}</span></td>
+                                <td><span>1</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:20px">
+            <p class="text-danger">Việc tính toán ra điểm cạnh tranh của toàn công ty sẽ phức tạp hơn với công thức được mô tả như sau :</p>
+            <div class="col-md-4"><img  style="margin-left:122px" src="~/Content/Images/ScoreOcean.png" /></div>
+            <div class="col-md-8" style="padding-top: 32px;font-weight: 700;">
+            (Công thức tính số điểm cạnh tranh của công ty Ocean)
+            </div>
+            
+            <img src="~/Content/Images/ScoreTheory.PNG" />
         </div>
     </div>
 </div>
-
+<script src="~/Scripts/app.js"></script>

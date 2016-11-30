@@ -43,6 +43,7 @@ namespace Competitiveness.Controllers
         {
             try
             {
+                //Math.Round((double)(attributeScore), 4, MidpointRounding.AwayFromZero);
                 Random randNum = new Random();
                 if (String.IsNullOrEmpty(newCompany.Name))
                 {
@@ -72,7 +73,8 @@ namespace Competitiveness.Controllers
                         FactorId = factor.FactorId,
                         FactorName = factor.FactorName,
                         Score = factor.Score,
-                        Weight = factor.Weight * (0.9 + randNum.NextDouble() * 0.2)
+                        Weight = Math.Round((double)(factor.Weight * (0.9 + randNum.NextDouble() * 0.2)), 4, MidpointRounding.AwayFromZero)
+                 
                     };
                     db.FactorsOfCompanies.Add(factorOfCompany);
                 }
@@ -86,7 +88,8 @@ namespace Competitiveness.Controllers
                         CriteriaId = criteria.CriteriaId,
                         CriteriaName = criteria.CriteriaName,
                         Score = criteria.Score,
-                        Weight = criteria.Weight * (0.9+ randNum.NextDouble()*0.2)
+                        Weight = Math.Round((double)(criteria.Weight * (0.9 + randNum.NextDouble() * 0.2)), 4, MidpointRounding.AwayFromZero)
+                 
                     };
                     db.CriteriasOfCompanies.Add(criteriaOfCompany);
                 }
@@ -101,7 +104,8 @@ namespace Competitiveness.Controllers
                         AttributeId = attribute.AttributeId,
                         AttributeName = attribute.AttributeName,
                         Score = attribute.Score,
-                        Weight = attribute.Weight * (0.9 + randNum.NextDouble() * 0.2)
+                        Weight = Math.Round((double)(attribute.Weight * (0.9 + randNum.NextDouble() * 0.2)), 4, MidpointRounding.AwayFromZero)
+                   
                     };
                     db.AttributesOfCompanies.Add(attributesOfCompany);
                 }
