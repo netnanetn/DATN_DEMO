@@ -73,7 +73,7 @@ namespace Competitiveness.Controllers
                         FactorId = factor.FactorId,
                         FactorName = factor.FactorName,
                         Score = factor.Score,
-                        Weight = Math.Round((double)(factor.Weight * (0.9 + randNum.NextDouble() * 0.2)), 4, MidpointRounding.AwayFromZero)
+                        Weight = Math.Round((double)(factor.Weight), 4, MidpointRounding.AwayFromZero)
                  
                     };
                     db.FactorsOfCompanies.Add(factorOfCompany);
@@ -88,7 +88,7 @@ namespace Competitiveness.Controllers
                         CriteriaId = criteria.CriteriaId,
                         CriteriaName = criteria.CriteriaName,
                         Score = criteria.Score,
-                        Weight = Math.Round((double)(criteria.Weight * (0.9 + randNum.NextDouble() * 0.2)), 4, MidpointRounding.AwayFromZero)
+                        Weight = Math.Round((double)(criteria.Weight), 4, MidpointRounding.AwayFromZero)
                  
                     };
                     db.CriteriasOfCompanies.Add(criteriaOfCompany);
@@ -104,7 +104,7 @@ namespace Competitiveness.Controllers
                         AttributeId = attribute.AttributeId,
                         AttributeName = attribute.AttributeName,
                         Score = attribute.Score,
-                        Weight = Math.Round((double)(attribute.Weight * (0.9 + randNum.NextDouble() * 0.2)), 4, MidpointRounding.AwayFromZero)
+                        Weight = Math.Round((double)(attribute.Weight * (0.5 + randNum.NextDouble() * 0.8)), 4, MidpointRounding.AwayFromZero)
                    
                     };
                     db.AttributesOfCompanies.Add(attributesOfCompany);
