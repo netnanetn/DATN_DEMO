@@ -161,4 +161,3 @@ E:\Trung\DATN\Competitiveness\Competitiveness\bin\Microsoft.Owin.Security.Twitte
 E:\Trung\DATN\Competitiveness\Competitiveness\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\Trung\DATN\Competitiveness\Competitiveness\obj\Debug\Competitiveness.dll
 E:\Trung\DATN\Competitiveness\Competitiveness\obj\Debug\Competitiveness.pdb
-E:\Trung\DATN\Competitiveness\Competitiveness\obj\Debug\Competitiveness.csprojResolveAssemblyReference.cache
