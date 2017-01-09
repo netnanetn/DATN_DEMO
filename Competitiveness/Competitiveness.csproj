@@ -197,16 +197,16 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Attribute.cs">
+    <Compile Include="Attributes.cs">
       <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
     <Compile Include="AttributesOfCompany.cs">
       <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
-    <Compile Include="Branch.cs">
+    <Compile Include="Branchs.cs">
       <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
-    <Compile Include="Company.cs">
+    <Compile Include="Companies.cs">
       <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
     <Compile Include="CompetitivenessIndex.Context.cs">
@@ -230,13 +230,13 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Criteria.cs">
+    <Compile Include="Criterias.cs">
       <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
     <Compile Include="CriteriasOfCompany.cs">
       <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
-    <Compile Include="Factor.cs">
+    <Compile Include="Factors.cs">
       <DependentUpon>CompetitivenessIndex.tt</DependentUpon>
     </Compile>
     <Compile Include="FactorsOfCompany.cs">

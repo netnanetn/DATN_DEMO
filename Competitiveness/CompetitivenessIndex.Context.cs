@@ -25,13 +25,13 @@ namespace Competitiveness
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Attribute> Attributes { get; set; }
-        public virtual DbSet<AttributesOfCompany> AttributesOfCompanies { get; set; }
-        public virtual DbSet<Branch> Branchs { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<Criteria> Criterias { get; set; }
-        public virtual DbSet<CriteriasOfCompany> CriteriasOfCompanies { get; set; }
-        public virtual DbSet<Factor> Factors { get; set; }
-        public virtual DbSet<FactorsOfCompany> FactorsOfCompanies { get; set; }
+        public virtual DbSet<Attributes> Attributes { get; set; }
+        public virtual DbSet<AttributesOfCompany> AttributesOfCompany { get; set; }
+        public virtual DbSet<Branchs> Branchs { get; set; }
+        public virtual DbSet<Companies> Companies { get; set; }
+        public virtual DbSet<Criterias> Criterias { get; set; }
+        public virtual DbSet<CriteriasOfCompany> CriteriasOfCompany { get; set; }
+        public virtual DbSet<Factors> Factors { get; set; }
+        public virtual DbSet<FactorsOfCompany> FactorsOfCompany { get; set; }
     }
 }

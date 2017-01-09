@@ -30,12 +30,12 @@ namespace Competitiveness.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<Competitiveness.Branch> Branches { get; set; }
+        public System.Data.Entity.DbSet<Competitiveness.Branchs> Branches { get; set; }
 
-        public System.Data.Entity.DbSet<Competitiveness.Factor> Factors { get; set; }
+        public System.Data.Entity.DbSet<Competitiveness.Factors> Factors { get; set; }
 
-        public System.Data.Entity.DbSet<Competitiveness.Criteria> Criteria { get; set; }
+        public System.Data.Entity.DbSet<Competitiveness.Criterias> Criteria { get; set; }
 
-        public System.Data.Entity.DbSet<Competitiveness.Attribute> Attributes { get; set; }
+        public System.Data.Entity.DbSet<Competitiveness.Attributes> Attributes { get; set; }
     }
 }

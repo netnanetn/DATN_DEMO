@@ -57,7 +57,7 @@ namespace Competitiveness.Controllers
 
 
                 var branchId = newCompany.BranchId;
-                Company company = new Company()
+                Companies company = new Companies()
                 {
                     BranchId = branchId,
                     Name = newCompany.Name,
@@ -76,7 +76,7 @@ namespace Competitiveness.Controllers
                         Weight = Math.Round((double)(factor.Weight), 4, MidpointRounding.AwayFromZero)
                  
                     };
-                    db.FactorsOfCompanies.Add(factorOfCompany);
+                    db.FactorsOfCompany.Add(factorOfCompany);
                 }
                 var criterias = db.Criterias.Where(x => x.BranchId == branchId);
                 foreach (var criteria in criterias)
@@ -91,7 +91,7 @@ namespace Competitiveness.Controllers
                         Weight = Math.Round((double)(criteria.Weight), 4, MidpointRounding.AwayFromZero)
                  
                     };
-                    db.CriteriasOfCompanies.Add(criteriaOfCompany);
+                    db.CriteriasOfCompany.Add(criteriaOfCompany);
                 }
                 var attributes = db.Attributes.Where(x => x.BranchId == branchId);
                 foreach (var attribute in attributes)
@@ -107,7 +107,7 @@ namespace Competitiveness.Controllers
                         Weight = Math.Round((double)(attribute.Weight * (0.5 + randNum.NextDouble() * 0.8)), 4, MidpointRounding.AwayFromZero)
                    
                     };
-                    db.AttributesOfCompanies.Add(attributesOfCompany);
+                    db.AttributesOfCompany.Add(attributesOfCompany);
                 }
                 db.SaveChanges();
 
@@ -123,13 +123,13 @@ namespace Competitiveness.Controllers
         public ActionResult DetailsOfCompany(int companyId)
         {
             var model = new AllModelCompany();
-            var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == companyId);
+            var factors = db.FactorsOfCompany.Where(x => x.CompanyId == companyId);
             model.factor.AddRange(factors);
 
-            var criterias = db.CriteriasOfCompanies.Where(x => x.CompanyId == companyId);
+            var criterias = db.CriteriasOfCompany.Where(x => x.CompanyId == companyId);
             model.criteria.AddRange(criterias);
 
-            var attributes = db.AttributesOfCompanies.Where(x => x.CompanyId == companyId);
+            var attributes = db.AttributesOfCompany.Where(x => x.CompanyId == companyId);
             model.attribute.AddRange(attributes);
 
             return View(model);
@@ -139,13 +139,13 @@ namespace Competitiveness.Controllers
         public ActionResult EditManyAttribute(int companyId)
         {
             var model = new AllModelCompany();
-            var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == companyId);
+            var factors = db.FactorsOfCompany.Where(x => x.CompanyId == companyId);
             model.factor.AddRange(factors);
 
-            var criterias = db.CriteriasOfCompanies.Where(x => x.CompanyId == companyId);
+            var criterias = db.CriteriasOfCompany.Where(x => x.CompanyId == companyId);
             model.criteria.AddRange(criterias);
 
-            var attributes = db.AttributesOfCompanies.Where(x => x.CompanyId == companyId);
+            var attributes = db.AttributesOfCompany.Where(x => x.CompanyId == companyId);
             model.attribute.AddRange(attributes);
 
             return View(model);
@@ -160,19 +160,19 @@ namespace Competitiveness.Controllers
                 CompanyId = allModel.factor[0].CompanyId;
                 foreach (var factor in allModel.factor)
                 {
-                    var fc = db.FactorsOfCompanies.Find(factor.Id);
+                    var fc = db.FactorsOfCompany.Find(factor.Id);
                     fc.FactorName = factor.FactorName;
                     fc.Weight = factor.Weight;
                 }
                 foreach (var criteria in allModel.criteria)
                 {
-                    var cr = db.CriteriasOfCompanies.Find(criteria.Id);
+                    var cr = db.CriteriasOfCompany.Find(criteria.Id);
                     cr.CriteriaName = criteria.CriteriaName;
                     cr.Weight = criteria.Weight;
                 }
                 foreach (var attribute in allModel.attribute)
                 {
-                    var at = db.AttributesOfCompanies.Find(attribute.Id);
+                    var at = db.AttributesOfCompany.Find(attribute.Id);
                     at.AttributeName = attribute.AttributeName;
                     at.Weight = attribute.Weight;
                 }
@@ -188,20 +188,20 @@ namespace Competitiveness.Controllers
         public ActionResult SyncData(int companyId = 0)
         {
 
-            var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == companyId);
+            var factors = db.FactorsOfCompany.Where(x => x.CompanyId == companyId);
             var totalWeightFactor = factors.Sum(x => x.Weight);
 
             foreach (var factor in factors)
             {
                 var weightOfFactor = (double)(factor.Weight / totalWeightFactor);//trọng lượng của từng yếu tố theo %
-                var criterias = db.CriteriasOfCompanies.Where(x => x.CompanyId == companyId && x.FactorId == factor.FactorId);
+                var criterias = db.CriteriasOfCompany.Where(x => x.CompanyId == companyId && x.FactorId == factor.FactorId);
                 var totalWeightCriteria = criterias.Sum(x => x.Weight);
 
 
                 foreach (var criteria in criterias)
                 {
                     var weightOfCriteria = (double)(criteria.Weight / totalWeightCriteria);//trọng lượng của từng tiêu chí theo %
-                    var attributes = db.AttributesOfCompanies.Where(x => x.CompanyId == companyId && x.CriteriaId == criteria.CriteriaId && x.FactorId == factor.FactorId);
+                    var attributes = db.AttributesOfCompany.Where(x => x.CompanyId == companyId && x.CriteriaId == criteria.CriteriaId && x.FactorId == factor.FactorId);
                     var totalWeightAttribute = attributes.Sum(x => x.Weight);
 
                     foreach (var attribute in attributes)
@@ -225,14 +225,14 @@ namespace Competitiveness.Controllers
         {
             try
             {
-                Company cp = db.Companies.Where(x=>x.CompanyId == companyId).SingleOrDefault();
-                var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == cp.CompanyId);
-                var criterias = db.CriteriasOfCompanies.Where(x => x.CompanyId == cp.CompanyId);
-                var attributes = db.AttributesOfCompanies.Where(x => x.CompanyId == cp.CompanyId);
+                Companies cp = db.Companies.Where(x=>x.CompanyId == companyId).SingleOrDefault();
+                var factors = db.FactorsOfCompany.Where(x => x.CompanyId == cp.CompanyId);
+                var criterias = db.CriteriasOfCompany.Where(x => x.CompanyId == cp.CompanyId);
+                var attributes = db.AttributesOfCompany.Where(x => x.CompanyId == cp.CompanyId);
                 // đoạn này mở sau khi làm phần xác nhận đã
-                db.AttributesOfCompanies.RemoveRange(attributes);
-                db.CriteriasOfCompanies.RemoveRange(criterias);
-                db.FactorsOfCompanies.RemoveRange(factors);
+                db.AttributesOfCompany.RemoveRange(attributes);
+                db.CriteriasOfCompany.RemoveRange(criterias);
+                db.FactorsOfCompany.RemoveRange(factors);
                 db.Companies.Remove(cp);
                 db.SaveChanges();
 
@@ -247,16 +247,16 @@ namespace Competitiveness.Controllers
         [HttpGet]
         public ActionResult EditCompanyPartial(int companyId)
         {
-            Company company = new Company();
+            Companies company = new Companies();
             company = db.Companies.Where(x=>x.CompanyId == companyId).SingleOrDefault();
             return PartialView("EditCompanyPartial", company);
         }
         [HttpPost]
-        public ActionResult EditCompanyPartial(Company company)
+        public ActionResult EditCompanyPartial(Companies company)
         {
             try
             {
-                Company cp = db.Companies.Where(x=>x.CompanyId == company.CompanyId).SingleOrDefault();
+                Companies cp = db.Companies.Where(x=>x.CompanyId == company.CompanyId).SingleOrDefault();
                 cp.Name = company.Name;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -277,7 +277,7 @@ namespace Competitiveness.Controllers
         public ActionResult CompareChartCompany(int companyId)
         {
             ListCriteriasOfCompany listModel = new ListCriteriasOfCompany();
-            var factors = db.FactorsOfCompanies.Where(x => x.CompanyId == companyId);
+            var factors = db.FactorsOfCompany.Where(x => x.CompanyId == companyId);
             listModel.factors.AddRange(factors);
             return View(listModel);
         }
@@ -298,7 +298,7 @@ namespace Competitiveness.Controllers
                 jsonObject.MeanWeight.Add(JsonScoreNormal);
             }
 
-            var criteriaCompanys = db.CriteriasOfCompanies.Where(x=>x.CompanyId == companyId && x.FactorId == factorId);
+            var criteriaCompanys = db.CriteriasOfCompany.Where(x=>x.CompanyId == companyId && x.FactorId == factorId);
              foreach(var criteriaCompany in criteriaCompanys)
             {
                 var JsonScoreCompany = new CompetitivenessJson

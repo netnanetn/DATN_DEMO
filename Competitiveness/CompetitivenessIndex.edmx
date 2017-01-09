@@ -112,7 +112,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CompetitivenessIndexModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Attribute">
+        <EntityType Name="Attributes">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -139,7 +139,7 @@
           <Property Name="Score" Type="Double" />
           <Property Name="Weight" Type="Double" />
         </EntityType>
-        <EntityType Name="Branch">
+        <EntityType Name="Branchs">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -147,7 +147,7 @@
           <Property Name="BranchId" Type="Int32" Nullable="false" />
           <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Company">
+        <EntityType Name="Companies">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -156,7 +156,7 @@
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="BranchId" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="Criteria">
+        <EntityType Name="Criterias">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -181,7 +181,7 @@
           <Property Name="Score" Type="Double" />
           <Property Name="Weight" Type="Double" />
         </EntityType>
-        <EntityType Name="Factor">
+        <EntityType Name="Factors">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -205,14 +205,14 @@
           <Property Name="Weight" Type="Double" />
         </EntityType>
         <EntityContainer Name="CompetitivenessIndexEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Attributes" EntityType="Self.Attribute" />
-          <EntitySet Name="AttributesOfCompanies" EntityType="Self.AttributesOfCompany" />
-          <EntitySet Name="Branchs" EntityType="Self.Branch" />
-          <EntitySet Name="Companies" EntityType="Self.Company" />
-          <EntitySet Name="Criterias" EntityType="Self.Criteria" />
-          <EntitySet Name="CriteriasOfCompanies" EntityType="Self.CriteriasOfCompany" />
-          <EntitySet Name="Factors" EntityType="Self.Factor" />
-          <EntitySet Name="FactorsOfCompanies" EntityType="Self.FactorsOfCompany" />
+          <EntitySet Name="Attributes" EntityType="Self.Attributes" />
+          <EntitySet Name="AttributesOfCompany" EntityType="Self.AttributesOfCompany" />
+          <EntitySet Name="Branchs" EntityType="Self.Branchs" />
+          <EntitySet Name="Companies" EntityType="Self.Companies" />
+          <EntitySet Name="Criterias" EntityType="Self.Criterias" />
+          <EntitySet Name="CriteriasOfCompany" EntityType="Self.CriteriasOfCompany" />
+          <EntitySet Name="Factors" EntityType="Self.Factors" />
+          <EntitySet Name="FactorsOfCompany" EntityType="Self.FactorsOfCompany" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -221,7 +221,7 @@
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="CompetitivenessIndexModelStoreContainer" CdmEntityContainer="CompetitivenessIndexEntities">
           <EntitySetMapping Name="Attributes">
-            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Attribute">
+            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Attributes">
               <MappingFragment StoreEntitySet="Attributes">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -235,7 +235,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AttributesOfCompanies">
+          <EntitySetMapping Name="AttributesOfCompany">
             <EntityTypeMapping TypeName="CompetitivenessIndexModel.AttributesOfCompany">
               <MappingFragment StoreEntitySet="AttributesOfCompany">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -250,7 +250,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Branchs">
-            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Branch">
+            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Branchs">
               <MappingFragment StoreEntitySet="Branchs">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -259,7 +259,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Company">
+            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Companies">
               <MappingFragment StoreEntitySet="Companies">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -269,7 +269,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Criterias">
-            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Criteria">
+            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Criterias">
               <MappingFragment StoreEntitySet="Criterias">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -282,7 +282,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CriteriasOfCompanies">
+          <EntitySetMapping Name="CriteriasOfCompany">
             <EntityTypeMapping TypeName="CompetitivenessIndexModel.CriteriasOfCompany">
               <MappingFragment StoreEntitySet="CriteriasOfCompany">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -296,7 +296,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Factors">
-            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Factor">
+            <EntityTypeMapping TypeName="CompetitivenessIndexModel.Factors">
               <MappingFragment StoreEntitySet="Factors">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -308,7 +308,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FactorsOfCompanies">
+          <EntitySetMapping Name="FactorsOfCompany">
             <EntityTypeMapping TypeName="CompetitivenessIndexModel.FactorsOfCompany">
               <MappingFragment StoreEntitySet="FactorsOfCompany">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -334,7 +334,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CompetitivenessIndexModelStoreContainer" CdmEntityContainer="CompetitivenessIndexEntities">
     <EntitySetMapping Name="Attributes">
-      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Attribute">
+      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Attributes">
         <MappingFragment StoreEntitySet="Attributes">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -16,7 +16,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AttributesOfCompanies">
+    <EntitySetMapping Name="AttributesOfCompany">
       <EntityTypeMapping TypeName="CompetitivenessIndexModel.AttributesOfCompany">
         <MappingFragment StoreEntitySet="AttributesOfCompany">
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -31,7 +31,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Branchs">
-      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Branch">
+      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Branchs">
         <MappingFragment StoreEntitySet="Branchs">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -40,7 +40,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Companies">
-      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Company">
+      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Companies">
         <MappingFragment StoreEntitySet="Companies">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
@@ -50,7 +50,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Criterias">
-      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Criteria">
+      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Criterias">
         <MappingFragment StoreEntitySet="Criterias">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -63,7 +63,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CriteriasOfCompanies">
+    <EntitySetMapping Name="CriteriasOfCompany">
       <EntityTypeMapping TypeName="CompetitivenessIndexModel.CriteriasOfCompany">
         <MappingFragment StoreEntitySet="CriteriasOfCompany">
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -77,7 +77,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Factors">
-      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Factor">
+      <EntityTypeMapping TypeName="CompetitivenessIndexModel.Factors">
         <MappingFragment StoreEntitySet="Factors">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="BranchId" ColumnName="BranchId" />
@@ -89,7 +89,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FactorsOfCompanies">
+    <EntitySetMapping Name="FactorsOfCompany">
       <EntityTypeMapping TypeName="CompetitivenessIndexModel.FactorsOfCompany">
         <MappingFragment StoreEntitySet="FactorsOfCompany">
           <ScalarProperty Name="Id" ColumnName="Id" />

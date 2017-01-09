@@ -12,11 +12,14 @@ namespace Competitiveness
     using System;
     using System.Collections.Generic;
     
-    public partial class Company
+    public partial class Factors
     {
         public int Id { get; set; }
-        public Nullable<int> CompanyId { get; set; }
-        public string Name { get; set; }
         public int BranchId { get; set; }
+        public int CompanyId { get; set; }
+        public int FactorId { get; set; }
+        public string FactorName { get; set; }
+        public Nullable<double> Score { get; set; }
+        public Nullable<double> Weight { get; set; }
     }
 }

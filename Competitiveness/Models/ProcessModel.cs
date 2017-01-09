@@ -48,16 +48,16 @@ namespace Competitiveness.Models
     }
     public class AllModel
     {
-        public List<Factor> factor { get; set; }
-        public List<Criteria> criteria { get; set; }
-        public List<Attribute> attribute { get; set; }
-        public List<Branch> branch { get; set; }
+        public List<Factors> factor { get; set; }
+        public List<Criterias> criteria { get; set; }
+        public List<Attributes> attribute { get; set; }
+        public List<Branchs> branch { get; set; }
         public AllModel()
         {
-            factor = new List<Factor>();
-            criteria = new List<Criteria>();
-            attribute = new List<Attribute>();
-            branch = new List<Branch>();
+            factor = new List<Factors>();
+            criteria = new List<Criterias>();
+            attribute = new List<Attributes>();
+            branch = new List<Branchs>();
         }
     }
     public class ListModel

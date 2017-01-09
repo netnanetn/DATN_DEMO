@@ -1,4 +1,5 @@
-﻿using Competitiveness.Models;
+﻿using Competitiveness;
+using Competitiveness.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,12 +34,12 @@ namespace Competitiveness.Controllers
 
         // POST: Branch/Create
         [HttpPost]
-        public ActionResult Create(Branch branch)
+        public ActionResult Create(Branchs branch)
         {
             try
             {
                 // TODO: Add insert logic here
-                var branchSave = new Branch
+                var branchSave = new Branchs
                 {
                     BranchId = branch.BranchId,
                     BranchName = branch.BranchName
@@ -46,7 +47,7 @@ namespace Competitiveness.Controllers
                 db.Branchs.Add(branchSave);
                 db.SaveChanges();
 
-                return RedirectToAction("/Branch/Index");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -107,16 +108,16 @@ namespace Competitiveness.Controllers
         [HttpGet]
         public ActionResult EditFactorPartial(int Id)
         {
-            Factor fc = new Factor();
+            Factors fc = new Factors();
             fc = db.Factors.Find(Id);
             return PartialView("EditFactorPartial", fc);
         }
         [HttpPost]
-        public ActionResult EditFactorPartial(Factor factor)
+        public ActionResult EditFactorPartial(Factors factor)
         {
             try
             {
-                Factor fc = db.Factors.Find(factor.Id);
+                Factors fc = db.Factors.Find(factor.Id);
                 fc.FactorName = factor.FactorName;
                 fc.Score = factor.Score;
                 fc.Weight = factor.Weight;
@@ -132,16 +133,16 @@ namespace Competitiveness.Controllers
         [HttpGet]
         public ActionResult EditCriteriaPartial(int Id)
         {
-            Criteria cr = new Criteria();
+            Criterias cr = new Criterias();
             cr = db.Criterias.Find(Id);
             return PartialView("EditCriteriaPartial", cr);
         }
         [HttpPost]
-        public ActionResult EditCriteriaPartial(Criteria criteria)
+        public ActionResult EditCriteriaPartial(Criterias criteria)
         {
             try
             {
-                Criteria cr = db.Criterias.Find(criteria.Id);
+                Criterias cr = db.Criterias.Find(criteria.Id);
                 cr.CriteriaName = criteria.CriteriaName;
                 cr.Score = criteria.Score;
                 cr.Weight = criteria.Weight;
@@ -157,16 +158,16 @@ namespace Competitiveness.Controllers
         [HttpGet]
         public ActionResult EditAttributePartial(int Id)
         {
-            Attribute at = new Attribute();
+            Attributes at = new Attributes();
             at = db.Attributes.Find(Id);
             return PartialView("EditAttributePartial", at);
         }
         [HttpPost]
-        public ActionResult EditAttributePartial(Attribute attribute)
+        public ActionResult EditAttributePartial(Attributes attribute)
         {
             try
             {
-                Attribute at = db.Attributes.Find(attribute.Id);
+                Attributes at = db.Attributes.Find(attribute.Id);
                 at.AttributeName = attribute.AttributeName;
                 at.Score = attribute.Score;
                 at.Weight = attribute.Weight;
@@ -182,16 +183,16 @@ namespace Competitiveness.Controllers
         [HttpGet]
         public ActionResult EditBranchPartial(int Id)
         {
-            Branch branch = new Branch();
+            Branchs branch = new Branchs();
             branch = db.Branchs.Find(Id);
             return PartialView("EditBranchPartial", branch);
         }
         [HttpPost]
-        public ActionResult EditBranchPartial(Branch branch)
+        public ActionResult EditBranchPartial(Branchs branch)
         {
             try
             {
-                Branch br = db.Branchs.Find(branch.Id);
+                Branchs br = db.Branchs.Find(branch.Id);
                 br.BranchName = branch.BranchName;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -332,12 +333,12 @@ namespace Competitiveness.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateFactor(int branchId, Factor factor)
+        public ActionResult CreateFactor(int branchId, Factors factor)
         {
             try
             {
                 var count = db.Factors.Max(x => x.Id) + 1;
-                var factorSave = new Factor
+                var factorSave = new Factors
                 {
                     BranchId = factor.BranchId,
                     FactorId = count,
@@ -348,7 +349,7 @@ namespace Competitiveness.Controllers
                 db.Factors.Add(factorSave);
                 db.SaveChanges();
 
-                return RedirectToAction("/Branch/Index");
+                return RedirectToAction("Edit", new { branchId = factor.BranchId });
             }
             catch (Exception ex)
             {
@@ -361,12 +362,12 @@ namespace Competitiveness.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateCriteria(Criteria criteria)
+        public ActionResult CreateCriteria(Criterias criteria)
         {
             try
             {
                 var count = db.Criterias.Max(x => x.Id) + 1;
-                var criteriaSave = new Criteria
+                var criteriaSave = new Criterias
                 {
                     BranchId = criteria.BranchId,
                     FactorId = criteria.FactorId,
@@ -391,12 +392,12 @@ namespace Competitiveness.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateAttribute(Attribute attribute)
+        public ActionResult CreateAttribute(Attributes attribute)
         {
             try
             {
                 var count = db.Attributes.Max(x => x.Id) + 1;
-                var attributeSave = new Attribute
+                var attributeSave = new Attributes
                 {
                     BranchId = attribute.BranchId,
                     FactorId = attribute.FactorId,
@@ -448,18 +449,6 @@ namespace Competitiveness.Controllers
 
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
             //foreach(var factor in factors)
             //{
             //    factor.Weight = factor.Score;
@@ -493,7 +482,7 @@ namespace Competitiveness.Controllers
             try
             {
                 // TODO: Add delete logic here
-                Factor fc = db.Factors.Find(id);
+                Factors fc = db.Factors.Find(id);
                 var branchId = fc.BranchId;
                 var criterias = db.Criterias.Where(x => x.FactorId == fc.FactorId);
                 var attributes = db.Attributes.Where(x => x.FactorId == fc.FactorId);
@@ -515,7 +504,7 @@ namespace Competitiveness.Controllers
             try
             {
                 // TODO: Add delete logic here
-                Criteria cr = db.Criterias.Find(id);
+                Criterias cr = db.Criterias.Find(id);
                 var branchId = cr.BranchId;
                 var attributes = db.Attributes.Where(x => x.CriteriaId == cr.CriteriaId);
                 db.Attributes.RemoveRange(attributes);
@@ -534,7 +523,7 @@ namespace Competitiveness.Controllers
         {
             try
             {
-                Attribute at = db.Attributes.Find(id);
+                Attributes at = db.Attributes.Find(id);
                 var branchId = at.BranchId;
                 db.Attributes.Remove(at);
                 db.SaveChanges();
@@ -552,7 +541,7 @@ namespace Competitiveness.Controllers
         {
             try
             {
-                Branch br = db.Branchs.Find(id);
+                Branchs br = db.Branchs.Find(id);
                 var factors = db.Factors.Where(x => x.BranchId == br.BranchId);
                 var criterias = db.Criterias.Where(x => x.BranchId == br.BranchId);
                 var attributes = db.Attributes.Where(x => x.BranchId == br.BranchId);

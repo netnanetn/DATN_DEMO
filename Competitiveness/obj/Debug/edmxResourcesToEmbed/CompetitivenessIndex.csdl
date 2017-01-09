@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="CompetitivenessIndexModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="Attribute">
+  <EntityType Name="Attributes">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -27,7 +27,7 @@
     <Property Name="Score" Type="Double" />
     <Property Name="Weight" Type="Double" />
   </EntityType>
-  <EntityType Name="Branch">
+  <EntityType Name="Branchs">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -35,7 +35,7 @@
     <Property Name="BranchId" Type="Int32" Nullable="false" />
     <Property Name="BranchName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="Company">
+  <EntityType Name="Companies">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -44,7 +44,7 @@
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="BranchId" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="Criteria">
+  <EntityType Name="Criterias">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -69,7 +69,7 @@
     <Property Name="Score" Type="Double" />
     <Property Name="Weight" Type="Double" />
   </EntityType>
-  <EntityType Name="Factor">
+  <EntityType Name="Factors">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -93,13 +93,13 @@
     <Property Name="Weight" Type="Double" />
   </EntityType>
   <EntityContainer Name="CompetitivenessIndexEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Attributes" EntityType="Self.Attribute" />
-    <EntitySet Name="AttributesOfCompanies" EntityType="Self.AttributesOfCompany" />
-    <EntitySet Name="Branchs" EntityType="Self.Branch" />
-    <EntitySet Name="Companies" EntityType="Self.Company" />
-    <EntitySet Name="Criterias" EntityType="Self.Criteria" />
-    <EntitySet Name="CriteriasOfCompanies" EntityType="Self.CriteriasOfCompany" />
-    <EntitySet Name="Factors" EntityType="Self.Factor" />
-    <EntitySet Name="FactorsOfCompanies" EntityType="Self.FactorsOfCompany" />
+    <EntitySet Name="Attributes" EntityType="Self.Attributes" />
+    <EntitySet Name="AttributesOfCompany" EntityType="Self.AttributesOfCompany" />
+    <EntitySet Name="Branchs" EntityType="Self.Branchs" />
+    <EntitySet Name="Companies" EntityType="Self.Companies" />
+    <EntitySet Name="Criterias" EntityType="Self.Criterias" />
+    <EntitySet Name="CriteriasOfCompany" EntityType="Self.CriteriasOfCompany" />
+    <EntitySet Name="Factors" EntityType="Self.Factors" />
+    <EntitySet Name="FactorsOfCompany" EntityType="Self.FactorsOfCompany" />
   </EntityContainer>
 </Schema>
